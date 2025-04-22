@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Masternet - Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -14,92 +13,82 @@
     }
     body {
       font-family: 'Orbitron', sans-serif;
-      background-color: #000;
+      background: #000;
       color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       overflow: hidden;
-      position: relative;
     }
     .container {
       background: #111;
-      border: 2px solid #9400d3;
+      border: 3px solid;
+      border-image: linear-gradient(45deg, violet, blue, cyan, violet) 1;
       border-radius: 16px;
       padding: 40px;
-      width: 320px;
-      text-align: center;
+      width: 90%;
+      max-width: 400px;
       box-shadow: 0 0 20px #9400d3;
+      animation: pulseBorder 3s infinite linear;
+    }
+    @keyframes pulseBorder {
+      0% { box-shadow: 0 0 10px #9400d3; }
+      50% { box-shadow: 0 0 20px #9400d3; }
+      100% { box-shadow: 0 0 10px #9400d3; }
     }
     .logo {
-      width: 100px;
+      width: 160px;
+      display: block;
       margin: 0 auto 20px;
-      animation: glow 2s infinite alternate;
     }
-    @keyframes glow {
-      from { filter: drop-shadow(0 0 4px #9400d3); }
-      to { filter: drop-shadow(0 0 20px #9400d3); }
-    }
-    h1 {
-      font-size: 22px;
+    h2 {
+      text-align: center;
       margin-bottom: 20px;
       color: #ccc;
     }
     input {
       width: 100%;
       padding: 12px;
-      margin: 8px 0;
+      margin-bottom: 15px;
       border: none;
       border-radius: 8px;
       background: #222;
-      color: white;
+      color: #fff;
     }
     button {
       width: 100%;
       padding: 12px;
-      background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
       border: none;
-      border-radius: 8px;
-      color: black;
+      background: #9400d3;
+      color: #fff;
       font-weight: bold;
+      border-radius: 8px;
       cursor: pointer;
-      margin-top: 10px;
-      background-size: 300% 300%;
-      animation: rgbmove 3s ease infinite;
+      transition: 0.3s;
     }
-    @keyframes rgbmove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    button:hover {
+      background: #7a00b3;
     }
     .toggle {
+      margin-top: 12px;
       color: #aaa;
-      font-size: 14px;
-      margin-top: 10px;
+      text-align: center;
       cursor: pointer;
-    }
-    .background-galaxy {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(ellipse at center, #222 0%, #000 100%);
-      z-index: -1;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="background-galaxy"></div>
   <div class="container">
-    <img src="logo.png" class="logo" alt="Masternet Logo">
-    <h1 id="form-title">Login na Masternet</h1>
-    <input type="email" placeholder="Email" id="email">
-    <input type="password" placeholder="Senha" id="senha">
+    <img src="logo.png" alt="Masternet Logo" class="logo" />
+    <h2 id="form-title">Login na Masternet</h2>
+    <input type="email" id="email" placeholder="Seu e-mail" />
+    <input type="password" id="senha" placeholder="Sua senha" />
     <button onclick="entrar()">Entrar</button>
     <div class="toggle" onclick="alternarFormulario()">Ainda não tem conta? Cadastre-se</div>
   </div>
+
   <script>
     let modoCadastro = false;
     function alternarFormulario() {
@@ -117,6 +106,7 @@
         toggle.innerText = 'Ainda não tem conta? Cadastre-se';
       }
     }
+
     function entrar() {
       const email = document.getElementById('email').value;
       const senha = document.getElementById('senha').value;
@@ -124,8 +114,7 @@
         alert("Preencha todos os campos");
         return;
       }
-      alert(modoCadastro ? 'Cadastro feito com sucesso!' : 'Login realizado!');
-      // Aqui conecta com Firebase ou segue pra animação da galáxia
+      window.location.href = "dashboard.html";
     }
   </script>
 </body>

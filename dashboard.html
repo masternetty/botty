@@ -1,37 +1,98 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Masternet - Galáxia</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <title>Masternet - Painel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(ellipse at center, #1a1a40 0%, #000 100%);
+      color: #fff;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      padding: 30px;
+      font-size: 28px;
+      color: #ccc;
+    }
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .btn {
+      background: #222;
+      border: 2px solid #9400d3;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 10px #9400d3;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      background: #333;
+    }
+    .support-popup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+    .support-popup a {
+      display: block;
+      margin: 8px 0;
+      background: #25D366;
+      color: white;
+      padding: 12px;
+      border-radius: 50px;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 0 10px #25D366;
+    }
+    .support-popup a.telegram {
+      background: #0088cc;
+      box-shadow: 0 0 10px #0088cc;
+    }
+    .voltar {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .voltar a {
+      color: #ccc;
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<body class="galaxy-screen">
-
-  <div class="galaxy-bg"></div>
-
-  <nav class="main-menu">
-    <button onclick="openPage('duvidas.html')">❓ Dúvidas</button>
-    <button onclick="openPage('carrinho.html')">🛒 Carrinho</button>
-    <button onclick="openPage('assinantes.html')">🌟 Assinantes</button>
-    <button onclick="openPage('produtos.html')">📦 Produtos</button>
-    <button onclick="openPage('perfil.html')">👤 Perfil</button>
-  </nav>
-
-  <div class="user-info">
-    <p>Bem-vindo, <strong id="userName">Fulano</strong></p>
-    <p>Total gasto: <span id="totalGasto">R$ 0,00</span></p>
-    <p>Código de indicação: <code id="codigoIndicacao">ABC123</code></p>
+<body>
+  <header>🌌 Bem-vindo à Masternet</header>
+  <div class="menu">
+    <div class="btn">📦 Produtos</div>
+    <div class="btn">❓ Dúvidas</div>
+    <div class="btn">🛒 Carrinho</div>
+    <div class="btn">👥 Assinantes</div>
+    <div class="btn">👤 Perfil</div>
   </div>
-
-  <button class="support-button" onclick="togglePopup()">💬</button>
-  <div class="popup" id="popup">
-    <strong>Fale com a gente:</strong>
-    <button class="whatsapp" onclick="window.open('https://wa.me/5519996804873', '_blank')">WhatsApp</button>
-    <button class="telegram" onclick="window.open('https://t.me/hteshtyh_bot', '_blank')">Telegram</button>
+  <div class="voltar">
+    <a href="index.html">← Voltar para o menu principal</a>
   </div>
-
-  <script src="js/main.js"></script>
+  <div class="support-popup">
+    <a href="https://wa.me/19996804873" target="_blank">WhatsApp Suporte</a>
+    <a class="telegram" href="https://t.me/hteshtyh_bot" target="_blank">Telegram Suporte</a>
+  </div>
 </body>
 </html>
