@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Masternet - Login</title>
+  <title>Masternet - Painel</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -13,114 +13,138 @@
     }
     body {
       font-family: 'Orbitron', sans-serif;
-      background: #000;
+      background: radial-gradient(ellipse at center, #1a1a40 0%, #000 100%);
       color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
+      overflow-x: hidden;
     }
-    .container {
-      background: #111;
-      border: 3px solid;
-      border-image: linear-gradient(45deg, violet, blue, cyan, violet) 1;
-      border-radius: 16px;
-      padding: 40px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 0 20px #9400d3;
-      animation: pulseBorder 3s infinite linear, enterGalaxy 1s ease-in-out;
-    }
-    @keyframes pulseBorder {
-      0% { box-shadow: 0 0 10px #9400d3; }
-      50% { box-shadow: 0 0 20px #9400d3; }
-      100% { box-shadow: 0 0 10px #9400d3; }
-    }
-
-    @keyframes enterGalaxy {
-      0% { transform: scale(0.8); opacity: 0.2; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .logo {
-      width: 160px;
-      display: block;
-      margin: 0 auto 20px;
-    }
-    h2 {
+    header {
       text-align: center;
-      margin-bottom: 20px;
+      padding: 30px;
+      font-size: 28px;
       color: #ccc;
     }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: none;
-      border-radius: 8px;
-      background: #222;
-      color: #fff;
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
     }
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      background: #9400d3;
-      color: #fff;
-      font-weight: bold;
-      border-radius: 8px;
+    .btn {
+      background: #222;
+      border: 2px solid #9400d3;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      font-size: 18px;
       cursor: pointer;
       transition: 0.3s;
+      box-shadow: 0 0 10px #9400d3;
     }
-    button:hover {
-      background: #7a00b3;
+    .btn:hover {
+      transform: scale(1.05);
+      background: #333;
     }
-    .toggle {
-      margin-top: 12px;
-      color: #aaa;
+    .sub-menu {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #333;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #333;
+    }
+    .btn.active + .sub-menu {
+      display: block;
+    }
+    .sub-menu a {
+      display: block;
+      padding: 8px;
+      background: #444;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+    .sub-menu a:hover {
+      background: #9400d3;
+    }
+    .support-popup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+    .support-popup a {
+      display: block;
+      margin: 8px 0;
+      background: #25D366;
+      color: white;
+      padding: 12px;
+      border-radius: 50px;
       text-align: center;
-      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 0 10px #25D366;
+    }
+    .support-popup a.telegram {
+      background: #0088cc;
+      box-shadow: 0 0 10px #0088cc;
+    }
+    .voltar {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .voltar a {
+      color: #ccc;
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="logo.png" alt="Masternet Logo" class="logo" />
-    <h2 id="form-title">Login na Masternet</h2>
-    <input type="email" id="email" placeholder="Seu e-mail" />
-    <input type="password" id="senha" placeholder="Sua senha" />
-    <button onclick="entrar()">Entrar</button>
-    <div class="toggle" onclick="alternarFormulario()">Ainda não tem conta? Cadastre-se</div>
+  <header>🌌 Bem-vindo à Masternet</header>
+  <div class="menu">
+    <div class="btn" onclick="toggleMenu(this)">📦 Produtos</div>
+    <div class="sub-menu">
+      <a href="javascript:void(0)">1 mês: R$ 35,00</a>
+      <a href="javascript:void(0)">2 meses: R$ 60,00</a>
+      <a href="javascript:void(0)">4 meses: R$ 100,00</a>
+    </div>
+    
+    <div class="btn" onclick="toggleMenu(this)">❓ Dúvidas</div>
+    <div class="sub-menu">
+      <a href="javascript:void(0)">Perguntas frequentes</a>
+      <a href="javascript:void(0)">Chat de suporte</a>
+    </div>
+
+    <div class="btn" onclick="toggleMenu(this)">🛒 Carrinho</div>
+    <div class="sub-menu">
+      <a href="javascript:void(0)">Ver itens no carrinho</a>
+    </div>
+
+    <div class="btn" onclick="toggleMenu(this)">👥 Assinantes</div>
+    <div class="sub-menu">
+      <a href="javascript:void(0)">Ver lista de assinantes</a>
+    </div>
+
+    <div class="btn" onclick="toggleMenu(this)">👤 Perfil</div>
+    <div class="sub-menu">
+      <a href="javascript:void(0)">Ver perfil</a>
+      <a href="javascript:void(0)">Editar perfil</a>
+    </div>
+  </div>
+  <div class="voltar">
+    <a href="index.html">← Voltar para o menu principal</a>
+  </div>
+  <div class="support-popup">
+    <a href="https://wa.me/19996804873" target="_blank">WhatsApp Suporte</a>
+    <a class="telegram" href="https://t.me/hteshtyh_bot" target="_blank">Telegram Suporte</a>
   </div>
 
   <script>
-    let modoCadastro = false;
-    function alternarFormulario() {
-      const titulo = document.getElementById('form-title');
-      const botao = document.querySelector('button');
-      const toggle = document.querySelector('.toggle');
-      modoCadastro = !modoCadastro;
-      if (modoCadastro) {
-        titulo.innerText = 'Cadastro na Masternet';
-        botao.innerText = 'Cadastrar';
-        toggle.innerText = 'Já tem conta? Faça login';
-      } else {
-        titulo.innerText = 'Login na Masternet';
-        botao.innerText = 'Entrar';
-        toggle.innerText = 'Ainda não tem conta? Cadastre-se';
-      }
-    }
-
-    function entrar() {
-      const email = document.getElementById('email').value;
-      const senha = document.getElementById('senha').value;
-      if (!email || !senha) {
-        alert("Preencha todos os campos");
-        return;
-      }
-      window.location.href = "dashboard.html";
+    function toggleMenu(btn) {
+      const subMenu = btn.nextElementSibling;
+      subMenu.classList.toggle('active');
     }
   </script>
 </body>
