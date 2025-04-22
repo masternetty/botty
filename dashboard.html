@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -76,12 +75,18 @@
       color: #ccc;
       text-decoration: underline;
     }
+    /* Adicionando efeito de animação ao abrir menu */
+    .btn:focus {
+      background: #9400d3;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
   <header>🌌 Bem-vindo à Masternet</header>
   <div class="menu">
-    <div class="btn">📦 Produtos</div>
+    <div class="btn" onclick="abrirProduto()">📦 Produtos</div>
+    <div class="btn" onclick="abrirIPTV()">🛰 Sistema IPTV</div>
     <div class="btn">❓ Dúvidas</div>
     <div class="btn">🛒 Carrinho</div>
     <div class="btn">👥 Assinantes</div>
@@ -94,5 +99,14 @@
     <a href="https://wa.me/19996804873" target="_blank">WhatsApp Suporte</a>
     <a class="telegram" href="https://t.me/hteshtyh_bot" target="_blank">Telegram Suporte</a>
   </div>
+
+  <script>
+    function abrirProduto() {
+      alert("Produtos disponíveis: \n1 mês: R$ 35,00 \n2 meses: R$ 60,00 \n4 meses: R$ 100,00");
+    }
+    function abrirIPTV() {
+      alert("Acesso ao Sistema IPTV!");
+    }
+  </script>
 </body>
 </html>
