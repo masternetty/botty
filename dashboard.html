@@ -11,6 +11,9 @@
       padding: 0;
       box-sizing: border-box;
     }
+    html, body {
+      height: 100%;
+    }
     body {
       font-family: 'Orbitron', sans-serif;
       background: black;
@@ -27,8 +30,8 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: url('https://i.gifer.com/7plj.gif') center center / cover no-repeat;
-      opacity: 0.2;
+      background: url('https://media.giphy.com/media/l0HlQ7LRalT9WziKQ/giphy.gif') center center / cover no-repeat;
+      opacity: 0.3;
       z-index: -2;
     }
     body::after {
@@ -38,8 +41,8 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: url('https://i.gifer.com/ZZ5H.gif') center center / cover no-repeat;
-      opacity: 0.15;
+      background: url('https://media.giphy.com/media/3o7TKz7z9gYp8d4KLu/giphy.gif') center center / cover no-repeat;
+      opacity: 0.2;
       z-index: -1;
     }
 
@@ -70,11 +73,11 @@
       animation: fadeInUp 1s ease forwards;
       opacity: 0;
     }
-    .btn:nth-child(1) { animation-delay: 0.2s; }
-    .btn:nth-child(3) { animation-delay: 0.4s; }
-    .btn:nth-child(5) { animation-delay: 0.6s; }
-    .btn:nth-child(7) { animation-delay: 0.8s; }
-    .btn:nth-child(9) { animation-delay: 1s; }
+    .btn:nth-of-type(1) { animation-delay: 0.2s; }
+    .btn:nth-of-type(2) { animation-delay: 0.4s; }
+    .btn:nth-of-type(3) { animation-delay: 0.6s; }
+    .btn:nth-of-type(4) { animation-delay: 0.8s; }
+    .btn:nth-of-type(5) { animation-delay: 1s; }
 
     @keyframes fadeInUp {
       0% { opacity: 0; transform: translateY(20px); }
@@ -126,14 +129,6 @@
       background: #0088cc;
       box-shadow: 0 0 10px #0088cc;
     }
-    .voltar {
-      text-align: center;
-      margin-top: 30px;
-    }
-    .voltar a {
-      color: #ccc;
-      text-decoration: underline;
-    }
   </style>
 </head>
 <body>
@@ -145,7 +140,7 @@
       <a href="#">2 meses: R$ 60,00</a>
       <a href="#">4 meses: R$ 100,00</a>
     </div>
-    
+
     <div class="btn" onclick="toggleMenu(this)">❓ Dúvidas</div>
     <div class="sub-menu">
       <a href="#">Perguntas frequentes</a>
@@ -168,9 +163,6 @@
       <a href="#">Editar perfil</a>
     </div>
   </div>
-  <div class="voltar">
-    <a href="#">← Voltar para o menu principal</a>
-  </div>
   <div class="support-popup">
     <a href="https://wa.me/19996804873" target="_blank">WhatsApp Suporte</a>
     <a class="telegram" href="https://t.me/hteshtyh_bot" target="_blank">Telegram Suporte</a>
@@ -180,6 +172,7 @@
     function toggleMenu(btn) {
       const subMenu = btn.nextElementSibling;
       subMenu.classList.toggle('active');
+      btn.classList.toggle('active');
     }
   </script>
 </body>
