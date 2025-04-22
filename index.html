@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masternet - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    .container {
+      background: #111;
+      border: 2px solid #9400d3;
+      border-radius: 16px;
+      padding: 40px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 0 20px #9400d3;
+    }
+    .logo {
+      width: 100px;
+      margin: 0 auto 20px;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 4px #9400d3); }
+      to { filter: drop-shadow(0 0 20px #9400d3); }
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 8px;
+      background: #222;
+      color: white;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+      border: none;
+      border-radius: 8px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      background-size: 300% 300%;
+      animation: rgbmove 3s ease infinite;
+    }
+    @keyframes rgbmove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .toggle {
+      color: #aaa;
+      font-size: 14px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .background-galaxy {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, #222 0%, #000 100%);
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-galaxy"></div>
+  <div class="container">
+    <img src="logo.png" class="logo" alt="Masternet Logo">
+    <h1 id="form-title">Login na Masternet</h1>
+    <input type="email" placeholder="Email" id="email">
+    <input type="password" placeholder="Senha" id="senha">
+    <button onclick="entrar()">Entrar</button>
+    <div class="toggle" onclick="alternarFormulario()">Ainda não tem conta? Cadastre-se</div>
+  </div>
+  <script>
+    let modoCadastro = false;
+    function alternarFormulario() {
+      const titulo = document.getElementById('form-title');
+      const botao = document.querySelector('button');
+      const toggle = document.querySelector('.toggle');
+      modoCadastro = !modoCadastro;
+      if (modoCadastro) {
+        titulo.innerText = 'Cadastro na Masternet';
+        botao.innerText = 'Cadastrar';
+        toggle.innerText = 'Já tem conta? Faça login';
+      } else {
+        titulo.innerText = 'Login na Masternet';
+        botao.innerText = 'Entrar';
+        toggle.innerText = 'Ainda não tem conta? Cadastre-se';
+      }
+    }
+    function entrar() {
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+      if (!email || !senha) {
+        alert("Preencha todos os campos");
+        return;
+      }
+      alert(modoCadastro ? 'Cadastro feito com sucesso!' : 'Login realizado!');
+      // Aqui conecta com Firebase ou segue pra animação da galáxia
+    }
+  </script>
+</body>
+</html>
