@@ -30,13 +30,19 @@
       width: 90%;
       max-width: 400px;
       box-shadow: 0 0 20px #9400d3;
-      animation: pulseBorder 3s infinite linear;
+      animation: pulseBorder 3s infinite linear, enterGalaxy 1s ease-in-out;
     }
     @keyframes pulseBorder {
       0% { box-shadow: 0 0 10px #9400d3; }
       50% { box-shadow: 0 0 20px #9400d3; }
       100% { box-shadow: 0 0 10px #9400d3; }
     }
+
+    @keyframes enterGalaxy {
+      0% { transform: scale(0.8); opacity: 0.2; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
     .logo {
       width: 160px;
       display: block;
