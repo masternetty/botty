@@ -46,6 +46,30 @@
       transform: scale(1.05);
       background: #333;
     }
+    .sub-menu {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #333;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #333;
+    }
+    .btn.active + .sub-menu {
+      display: block;
+    }
+    .sub-menu a {
+      display: block;
+      padding: 8px;
+      background: #444;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+    .sub-menu a:hover {
+      background: #9400d3;
+    }
     .support-popup {
       position: fixed;
       bottom: 20px;
@@ -75,22 +99,39 @@
       color: #ccc;
       text-decoration: underline;
     }
-    /* Adicionando efeito de animação ao abrir menu */
-    .btn:focus {
-      background: #9400d3;
-      color: #fff;
-    }
   </style>
 </head>
 <body>
   <header>🌌 Bem-vindo à Masternet</header>
   <div class="menu">
-    <div class="btn" onclick="abrirProduto()">📦 Produtos</div>
-    <div class="btn" onclick="abrirIPTV()">🛰 Sistema IPTV</div>
-    <div class="btn">❓ Dúvidas</div>
-    <div class="btn">🛒 Carrinho</div>
-    <div class="btn">👥 Assinantes</div>
-    <div class="btn">👤 Perfil</div>
+    <div class="btn" onclick="toggleMenu(this)">📦 Produtos</div>
+    <div class="sub-menu">
+      <a href="javascript:void(0)">1 mês: R$ 35,00</a>
+      <a href="javascript:void(0)">2 meses: R$ 60,00</a>
+      <a href="javascript:void(0)">4 meses: R$ 100,00</a>
+    </div>
+    
+    <div class="btn" onclick="toggleMenu(this)">❓ Dúvidas</div>
+    <div class="sub-menu">
+      <a href="javascript:void(0)">Perguntas frequentes</a>
+      <a href="javascript:void(0)">Chat de suporte</a>
+    </div>
+
+    <div class="btn" onclick="toggleMenu(this)">🛒 Carrinho</div>
+    <div class="sub-menu">
+      <a href="javascript:void(0)">Ver itens no carrinho</a>
+    </div>
+
+    <div class="btn" onclick="toggleMenu(this)">👥 Assinantes</div>
+    <div class="sub-menu">
+      <a href="javascript:void(0)">Ver lista de assinantes</a>
+    </div>
+
+    <div class="btn" onclick="toggleMenu(this)">👤 Perfil</div>
+    <div class="sub-menu">
+      <a href="javascript:void(0)">Ver perfil</a>
+      <a href="javascript:void(0)">Editar perfil</a>
+    </div>
   </div>
   <div class="voltar">
     <a href="index.html">← Voltar para o menu principal</a>
@@ -101,11 +142,9 @@
   </div>
 
   <script>
-    function abrirProduto() {
-      alert("Produtos disponíveis: \n1 mês: R$ 35,00 \n2 meses: R$ 60,00 \n4 meses: R$ 100,00");
-    }
-    function abrirIPTV() {
-      alert("Acesso ao Sistema IPTV!");
+    function toggleMenu(btn) {
+      const subMenu = btn.nextElementSibling;
+      subMenu.classList.toggle('active');
     }
   </script>
 </body>
