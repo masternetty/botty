@@ -11,18 +11,43 @@
       padding: 0;
       box-sizing: border-box;
     }
+    html, body {
+      height: 100%;
+    }
     body {
       font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(ellipse at center, #1a1a40 0%, #000 100%);
+      background: black;
       color: #fff;
       overflow-x: hidden;
+      position: relative;
     }
+
+    /* Vídeo de fundo */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100vw;
+      min-height: 100vh;
+      z-index: -2;
+      object-fit: cover;
+      opacity: 0.3;
+    }
+
     header {
       text-align: center;
       padding: 30px;
+    }
+    header img {
+      width: 150px;
+      display: block;
+      margin: 0 auto 10px;
+    }
+    header h1 {
       font-size: 28px;
       color: #ccc;
     }
+
     .menu {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -31,6 +56,7 @@
       max-width: 800px;
       margin: auto;
     }
+
     .btn {
       background: #222;
       border: 2px solid #9400d3;
@@ -46,6 +72,7 @@
       transform: scale(1.05);
       background: #333;
     }
+
     .sub-menu {
       display: none;
       margin-top: 10px;
@@ -54,9 +81,11 @@
       border-radius: 8px;
       box-shadow: 0 0 10px #333;
     }
+
     .btn.active + .sub-menu {
       display: block;
     }
+
     .sub-menu a {
       display: block;
       padding: 8px;
@@ -67,15 +96,18 @@
       margin: 5px 0;
       transition: 0.3s;
     }
+
     .sub-menu a:hover {
       background: #9400d3;
     }
+
     .support-popup {
       position: fixed;
       bottom: 20px;
       right: 20px;
       z-index: 999;
     }
+
     .support-popup a {
       display: block;
       margin: 8px 0;
@@ -87,55 +119,61 @@
       text-decoration: none;
       box-shadow: 0 0 10px #25D366;
     }
+
     .support-popup a.telegram {
       background: #0088cc;
       box-shadow: 0 0 10px #0088cc;
     }
-    .voltar {
-      text-align: center;
-      margin-top: 30px;
-    }
-    .voltar a {
-      color: #ccc;
-      text-decoration: underline;
-    }
   </style>
 </head>
 <body>
-  <header>🌌 Bem-vindo à Masternet</header>
+  <!-- Vídeo de fundo -->
+  <video autoplay muted loop id="bg-video">
+    <source src="https://cdn.coverr.co/videos/coverr-galaxy-in-motion-6310/1080p.mp4" type="video/mp4">
+  </video>
+
+  <header>
+    <img src="logo.png" alt="Logo Masternet" />
+    <h1>🌌 Bem-vindo à Masternet</h1>
+  </header>
+
   <div class="menu">
     <div class="btn" onclick="toggleMenu(this)">📦 Produtos</div>
     <div class="sub-menu">
-      <a href="javascript:void(0)">1 mês: R$ 35,00</a>
-      <a href="javascript:void(0)">2 meses: R$ 60,00</a>
-      <a href="javascript:void(0)">4 meses: R$ 100,00</a>
+      <a href="#">1 mês: R$ 35,00</a>
+      <a href="#">2 meses: R$ 60,00</a>
+      <a href="#">4 meses: R$ 100,00</a>
     </div>
-    
+
+    <div class="btn" onclick="toggleMenu(this)">🎁 Teste Grátis</div>
+    <div class="sub-menu">
+      <a href="https://t.me/hteshtyh_bot" target="_blank">Telegram</a>
+      <a href="https://wa.me/19996804873" target="_blank">WhatsApp</a>
+    </div>
+
     <div class="btn" onclick="toggleMenu(this)">❓ Dúvidas</div>
     <div class="sub-menu">
-      <a href="javascript:void(0)">Perguntas frequentes</a>
-      <a href="javascript:void(0)">Chat de suporte</a>
+      <a href="#">Perguntas frequentes</a>
+      <a href="#">Chat de suporte</a>
     </div>
 
     <div class="btn" onclick="toggleMenu(this)">🛒 Carrinho</div>
     <div class="sub-menu">
-      <a href="javascript:void(0)">Ver itens no carrinho</a>
+      <a href="#">Ver itens no carrinho</a>
     </div>
 
     <div class="btn" onclick="toggleMenu(this)">👥 Assinantes</div>
     <div class="sub-menu">
-      <a href="javascript:void(0)">Ver lista de assinantes</a>
+      <a href="#">Ver lista de assinantes</a>
     </div>
 
     <div class="btn" onclick="toggleMenu(this)">👤 Perfil</div>
     <div class="sub-menu">
-      <a href="javascript:void(0)">Ver perfil</a>
-      <a href="javascript:void(0)">Editar perfil</a>
+      <a href="#">Ver perfil</a>
+      <a href="#">Editar perfil</a>
     </div>
   </div>
-  <div class="voltar">
-    <a href="index.html">← Voltar para o menu principal</a>
-  </div>
+
   <div class="support-popup">
     <a href="https://wa.me/19996804873" target="_blank">WhatsApp Suporte</a>
     <a class="telegram" href="https://t.me/hteshtyh_bot" target="_blank">Telegram Suporte</a>
@@ -145,6 +183,7 @@
     function toggleMenu(btn) {
       const subMenu = btn.nextElementSibling;
       subMenu.classList.toggle('active');
+      btn.classList.toggle('active');
     }
   </script>
 </body>
