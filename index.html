@@ -10,13 +10,11 @@
       font-family: Arial, sans-serif;
       background-color: #000;
       color: #fff;
+      overflow-x: hidden;
     }
     header {
       text-align: center;
       padding: 2rem 1rem;
-    }
-    header img {
-      max-width: 200px;
     }
     section {
       padding: 2rem 1rem;
@@ -40,10 +38,6 @@
       border-radius: 8px;
       text-align: center;
     }
-    .product img {
-      width: 100%;
-      border-radius: 4px;
-    }
     .pix-section {
       background: #111;
       padding: 1rem;
@@ -58,6 +52,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      z-index: 9999;
     }
     .popup-btn a {
       background-color: #e60000;
@@ -71,16 +66,51 @@
     }
     .pix-code {
       font-size: 1.1rem;
-      word-break: break-all;
+      word-break: break-word;
       margin: 1rem 0;
       color: #0f0;
+    }
+    .feedbacks {
+      background-color: #111;
+      padding: 2rem 1rem;
+      border-top: 1px solid #e60000;
+      border-bottom: 1px solid #e60000;
+    }
+    .feedback {
+      margin-bottom: 1.5rem;
+    }
+    .feedback strong {
+      color: #e60000;
+    }
+    .floating-img {
+      position: fixed;
+      z-index: 1;
+      opacity: 0.15;
+      width: 120px;
+    }
+    .img-top-left {
+      top: 10px;
+      left: 10px;
+    }
+    .img-bottom-left {
+      bottom: 10px;
+      left: 10px;
+    }
+    .img-top-right {
+      top: 10px;
+      right: 10px;
+    }
+    .img-bottom-right {
+      bottom: 10px;
+      right: 10px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="edf9d58e-7620-4077-8d3f-01e2e2cd5be3.jpg" alt="Logo Master Net" />
-  </header>
+  <img src="https://upload.wikimedia.org/wikipedia/en/3/3c/CN_logo_2010.png" class="floating-img img-top-left" alt="Cartoon Network" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" class="floating-img img-top-right" alt="Disney+" />
+  <img src="https://upload.wikimedia.org/wikipedia/en/d/d8/Game_of_Thrones_title_card.jpg" class="floating-img img-bottom-left" alt="Game of Thrones" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Kylian_Mbapp%C3%A9_2019.jpg" class="floating-img img-bottom-right" alt="Jogador Mbappé" />
 
   <section>
     <h1>Bem-vindo à MASTER NET</h1>
@@ -89,17 +119,20 @@
 
   <section>
     <h2>Planos & Produtos</h2>
+    <p>Todos os planos incluem:</p>
+    <ul>
+      <li>1 tela simultânea</li>
+      <li>Mesmo suporte via WhatsApp/Telegram</li>
+    </ul>
+    <p><strong>Para adicionar mais telas, fale com nosso suporte via WhatsApp. O valor aumenta por ponto extra.</strong></p>
     <div class="products">
       <div class="product">
-        <img src="https://via.placeholder.com/300x180?text=Smart+TV+1" alt="TV 1" />
         <p>Plano 1 Mês - R$35,00</p>
       </div>
       <div class="product">
-        <img src="https://via.placeholder.com/300x180?text=Smart+TV+2" alt="TV 2" />
         <p>Plano 2 Meses - R$60,00</p>
       </div>
       <div class="product">
-        <img src="https://via.placeholder.com/300x180?text=Smart+TV+3" alt="TV 3" />
         <p>Plano 4 Meses - R$100,00</p>
       </div>
     </div>
@@ -109,7 +142,6 @@
     <h2>Formas de Pagamento</h2>
     <div class="pix-section">
       <p>Aceitamos apenas PIX. Após o pagamento, clique no ícone do WhatsApp para ativar seu plano.</p>
-      <p class="pix-code">5e1b47d1-614d-467f-9f4e-e3703eb7f278</p>
     </div>
   </section>
 
@@ -125,6 +157,15 @@
       <li>Sem contratos ou fidelidade</li>
     </ul>
     <p>Ficou com dúvidas? Chama no WhatsApp ou Telegram que a gente te explica tudo!</p>
+  </section>
+
+  <section class="feedbacks">
+    <h2>💬 O que nossos clientes dizem (+1000 pessoas satisfeitas)</h2>
+    <div class="feedback"><strong>Carlos M.:</strong> "Simplesmente o melhor IPTV que já usei! Qualidade top e suporte rápido."</div>
+    <div class="feedback"><strong>Juliana R.:</strong> "Fiz o teste grátis e ativei no mesmo dia. Funcionando liso na minha smart TV."</div>
+    <div class="feedback"><strong>Roberto L.:</strong> "Já testei vários, mas esse aqui me surpreendeu. Recomendo demais!"</div>
+    <div class="feedback"><strong>Mariana F.:</strong> "Atendimento super rápido. Vale cada centavo!"</div>
+    <div class="feedback"><strong>Eduardo S.:</strong> "Canais funcionando 24h sem travar. Muito melhor que TV a cabo."</div>
   </section>
 
   <div class="popup-btn">
