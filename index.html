@@ -8,7 +8,8 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #000;
+      background: transparent;
+      background-image: url('https://www.transparenttextures.com/patterns/black-linen.png');
       color: #fff;
       overflow-x: hidden;
     }
@@ -31,15 +32,25 @@
       gap: 1rem;
     }
     .product {
-      background: #111;
+      background: rgba(0, 0, 0, 0.8);
       border: 1px solid #e60000;
       padding: 1rem;
       width: 280px;
       border-radius: 8px;
       text-align: center;
     }
+    .product a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #e60000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
     .pix-section {
-      background: #111;
+      background: rgba(0, 0, 0, 0.8);
       padding: 1rem;
       border: 1px solid #e60000;
       text-align: center;
@@ -65,7 +76,7 @@
       box-shadow: 0 0 10px #e60000;
     }
     .feedbacks {
-      background-color: #111;
+      background-color: rgba(0, 0, 0, 0.8);
       padding: 2rem 1rem;
       border-top: 1px solid #e60000;
       border-bottom: 1px solid #e60000;
@@ -81,25 +92,26 @@
     }
     .floating-img {
       position: fixed;
-      z-index: 1;
-      opacity: 0.1;
-      width: 120px;
+      z-index: 0;
+      opacity: 0.12;
+      width: 140px;
+      pointer-events: none;
     }
     .img-top-left {
-      top: 10px;
-      left: 10px;
+      top: 5%;
+      left: 5%;
     }
     .img-bottom-left {
-      bottom: 10px;
-      left: 10px;
+      bottom: 5%;
+      left: 5%;
     }
     .img-top-right {
-      top: 10px;
-      right: 10px;
+      top: 5%;
+      right: 5%;
     }
     .img-bottom-right {
-      bottom: 10px;
-      right: 10px;
+      bottom: 5%;
+      right: 5%;
     }
     #comment-form input, #comment-form textarea {
       width: 100%;
@@ -120,10 +132,10 @@
   </style>
 </head>
 <body>
-  <img src="https://media.giphy.com/media/3o7TKzPtbBmhFqJEqk/giphy.gif" class="floating-img img-top-left" alt="Gumball" />
-  <img src="https://media.giphy.com/media/xT9IgIc0lryrxvqVGM/giphy.gif" class="floating-img img-top-right" alt="Finn" />
-  <img src="https://media.giphy.com/media/jUwpNzg9IcyrK/giphy.gif" class="floating-img img-bottom-left" alt="Mona Lisa" />
-  <img src="https://media.giphy.com/media/xUPGcEliCc7bETyfO8/giphy.gif" class="floating-img img-bottom-right" alt="Jogador" />
+  <img src="https://media.tenor.com/1nWsjOJK9lEAAAAd/spiderman-marvel.gif" class="floating-img img-top-left" alt="Homem-Aranha" />
+  <img src="https://media.tenor.com/Yzz_tsmzXG4AAAAC/hulk-smash.gif" class="floating-img img-top-right" alt="Hulk" />
+  <img src="https://media.tenor.com/3shOGVR1uAkAAAAd/superman.gif" class="floating-img img-bottom-left" alt="Superman" />
+  <img src="https://media.tenor.com/uV2fZBBvO4wAAAAd/marvel-avengers.gif" class="floating-img img-bottom-right" alt="Heróis" />
 
   <section>
     <h1>Bem-vindo à MASTER NET</h1>
@@ -132,15 +144,25 @@
 
   <section>
     <h2>Planos & Produtos</h2>
+    <p>Todos os planos incluem:</p>
     <ul>
       <li>1 tela simultânea</li>
       <li>Mesmo suporte via WhatsApp/Telegram</li>
     </ul>
     <p><strong>Para adicionar mais telas, fale com nosso suporte via WhatsApp. O valor aumenta por ponto extra.</strong></p>
     <div class="products">
-      <div class="product"><p>Plano 1 Mês - R$35,00</p></div>
-      <div class="product"><p>Plano 2 Meses - R$60,00</p></div>
-      <div class="product"><p>Plano 4 Meses - R$100,00</p></div>
+      <div class="product">
+        <p>Plano 1 Mês - R$35,00</p>
+        <a href="https://wa.me/5519996804873?text=Quero%20ativar%20o%20meu%20plano%20de%201%20m%C3%AAs">Ativar Agora</a>
+      </div>
+      <div class="product">
+        <p>Plano 2 Meses - R$60,00</p>
+        <a href="https://wa.me/5519996804873?text=Quero%20ativar%20o%20meu%20plano%20de%202%20meses">Ativar Agora</a>
+      </div>
+      <div class="product">
+        <p>Plano 4 Meses - R$100,00</p>
+        <a href="https://wa.me/5519996804873?text=Quero%20ativar%20o%20meu%20plano%20de%204%20meses">Ativar Agora</a>
+      </div>
     </div>
   </section>
 
@@ -155,6 +177,7 @@
     <h2>Dúvidas Frequentes - O que é IPTV?</h2>
     <p><strong>IPTV</strong> é a sigla para "Internet Protocol Television", ou seja, transmissão de TV pela internet. Com IPTV, você pode assistir canais de TV ao vivo, filmes, séries e muito mais, diretamente pela sua conexão de internet — sem antenas, cabos ou burocracia.</p>
     <p>Funciona em Smart TVs, celulares, TV Box, computadores e tablets. Basta ter um bom acesso à internet e pronto!</p>
+    <p>Vantagens:</p>
     <ul>
       <li>Mais de 5.000 canais</li>
       <li>Atualizações automáticas</li>
@@ -166,7 +189,13 @@
 
   <section class="feedbacks">
     <h2>💬 O que nossos clientes dizem (+1000 pessoas satisfeitas)</h2>
-    <div id="feedback-list"></div>
+    <div id="feedback-list">
+      <div class="feedback"><strong>Carlos M.:</strong> "Simplesmente o melhor IPTV que já usei! Qualidade top e suporte rápido."</div>
+      <div class="feedback"><strong>Juliana R.:</strong> "Fiz o teste grátis e ativei no mesmo dia. Funcionando liso na minha smart TV."</div>
+      <div class="feedback"><strong>Roberto L.:</strong> "Já testei vários, mas esse aqui me surpreendeu. Recomendo demais!"</div>
+      <div class="feedback"><strong>Mariana F.:</strong> "Atendimento super rápido. Vale cada centavo!"</div>
+      <div class="feedback"><strong>Eduardo S.:</strong> "Canais funcionando 24h sem travar. Muito melhor que TV a cabo."</div>
+    </div>
     <form id="comment-form">
       <input type="text" id="name" placeholder="Seu nome" required />
       <textarea id="message" placeholder="Seu comentário" required></textarea>
