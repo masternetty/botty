@@ -71,6 +71,9 @@
       border-bottom: 1px solid #e60000;
     }
     .feedback {
+      background: #222;
+      border-radius: 8px;
+      padding: 1rem;
       margin-bottom: 1rem;
     }
     .feedback strong {
@@ -79,25 +82,48 @@
     .floating-img {
       position: fixed;
       z-index: 1;
-      opacity: 0.15;
-      width: 100px;
-      animation: float 6s ease-in-out infinite;
+      opacity: 0.1;
+      width: 120px;
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .img-top-left {
+      top: 10px;
+      left: 10px;
     }
-    .img-top-left { top: 10px; left: 10px; }
-    .img-top-right { top: 10px; right: 10px; }
-    .img-bottom-left { bottom: 10px; left: 10px; }
-    .img-bottom-right { bottom: 10px; right: 10px; }
+    .img-bottom-left {
+      bottom: 10px;
+      left: 10px;
+    }
+    .img-top-right {
+      top: 10px;
+      right: 10px;
+    }
+    .img-bottom-right {
+      bottom: 10px;
+      right: 10px;
+    }
+    #comment-form input, #comment-form textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      border-radius: 5px;
+      border: none;
+    }
+    #comment-form button {
+      background-color: #e60000;
+      border: none;
+      padding: 0.5rem 1rem;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
-  <img src="https://upload.wikimedia.org/wikipedia/en/7/79/The_Amazing_World_of_Gumball_logo.svg" class="floating-img img-top-left" alt="Gumball" />
-  <img src="https://upload.wikimedia.org/wikipedia/en/b/bc/Adventure_Time_-_Title_card.png" class="floating-img img-top-right" alt="Finn e Jake" />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Kylian_Mbapp%C3%A9_2019.jpg" class="floating-img img-bottom-left" alt="Jogador de Futebol" />
-  <img src="https://upload.wikimedia.org/wikipedia/en/d/d8/Game_of_Thrones_title_card.jpg" class="floating-img img-bottom-right" alt="Game of Thrones" />
+  <img src="https://media.giphy.com/media/3o7TKzPtbBmhFqJEqk/giphy.gif" class="floating-img img-top-left" alt="Gumball" />
+  <img src="https://media.giphy.com/media/xT9IgIc0lryrxvqVGM/giphy.gif" class="floating-img img-top-right" alt="Finn" />
+  <img src="https://media.giphy.com/media/jUwpNzg9IcyrK/giphy.gif" class="floating-img img-bottom-left" alt="Mona Lisa" />
+  <img src="https://media.giphy.com/media/xUPGcEliCc7bETyfO8/giphy.gif" class="floating-img img-bottom-right" alt="Jogador" />
 
   <section>
     <h1>Bem-vindo à MASTER NET</h1>
@@ -106,7 +132,6 @@
 
   <section>
     <h2>Planos & Produtos</h2>
-    <p>Todos os planos incluem:</p>
     <ul>
       <li>1 tela simultânea</li>
       <li>Mesmo suporte via WhatsApp/Telegram</li>
@@ -130,7 +155,6 @@
     <h2>Dúvidas Frequentes - O que é IPTV?</h2>
     <p><strong>IPTV</strong> é a sigla para "Internet Protocol Television", ou seja, transmissão de TV pela internet. Com IPTV, você pode assistir canais de TV ao vivo, filmes, séries e muito mais, diretamente pela sua conexão de internet — sem antenas, cabos ou burocracia.</p>
     <p>Funciona em Smart TVs, celulares, TV Box, computadores e tablets. Basta ter um bom acesso à internet e pronto!</p>
-    <p>Vantagens:</p>
     <ul>
       <li>Mais de 5.000 canais</li>
       <li>Atualizações automáticas</li>
@@ -142,19 +166,39 @@
 
   <section class="feedbacks">
     <h2>💬 O que nossos clientes dizem (+1000 pessoas satisfeitas)</h2>
-    <div class="feedbacks-list">
-      <!-- Exemplo de feedback gerado dinamicamente -->
-      <!-- Aqui poderia ir um loop ou script para gerar feedbacks variados -->
-      <div class="feedback"><strong>André S.:</strong> "Top demais! Nunca mais volto pra TV a cabo."</div>
-      <div class="feedback"><strong>Ana L.:</strong> "Filmes em HD, canais de esporte sem travar, muito bom!"</div>
-      <div class="feedback"><strong>Bruno F.:</strong> "Atendimento excelente, recomendo de olhos fechados."</div>
-      <!-- Adicione mais comentários conforme desejado -->
-    </div>
+    <div id="feedback-list"></div>
+    <form id="comment-form">
+      <input type="text" id="name" placeholder="Seu nome" required />
+      <textarea id="message" placeholder="Seu comentário" required></textarea>
+      <button type="submit">Enviar comentário</button>
+    </form>
   </section>
 
   <div class="popup-btn">
     <a href="https://wa.me/5519996804873" target="_blank">💬 WhatsApp</a>
     <a href="https://t.me/hteshtyh_bot" target="_blank">🤖 Telegram</a>
   </div>
+
+  <script>
+    const feedbackList = document.getElementById("feedback-list");
+    const commentForm = document.getElementById("comment-form");
+
+    function createComment(name, message) {
+      const div = document.createElement("div");
+      div.className = "feedback";
+      div.innerHTML = `<strong>${name}:</strong> ${message}`;
+      feedbackList.prepend(div);
+    }
+
+    commentForm.onsubmit = (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const message = document.getElementById("message").value.trim();
+      if (name && message) {
+        createComment(name, message);
+        commentForm.reset();
+      }
+    };
+  </script>
 </body>
 </html>
