@@ -8,8 +8,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: transparent;
-      background-image: url('https://www.transparenttextures.com/patterns/black-linen.png');
+      background: #000;
       color: #fff;
       overflow-x: hidden;
     }
@@ -56,6 +55,11 @@
       text-align: center;
       border-radius: 8px;
     }
+    .pix-section img {
+      height: 40px;
+      margin: 0 10px;
+      vertical-align: middle;
+    }
     .popup-btn {
       position: fixed;
       bottom: 20px;
@@ -90,29 +94,6 @@
     .feedback strong {
       color: #e60000;
     }
-    .floating-img {
-      position: fixed;
-      z-index: 0;
-      opacity: 0.12;
-      width: 140px;
-      pointer-events: none;
-    }
-    .img-top-left {
-      top: 5%;
-      left: 5%;
-    }
-    .img-bottom-left {
-      bottom: 5%;
-      left: 5%;
-    }
-    .img-top-right {
-      top: 5%;
-      right: 5%;
-    }
-    .img-bottom-right {
-      bottom: 5%;
-      right: 5%;
-    }
     #comment-form input, #comment-form textarea {
       width: 100%;
       padding: 0.5rem;
@@ -132,10 +113,6 @@
   </style>
 </head>
 <body>
-  <img src="https://media.tenor.com/1nWsjOJK9lEAAAAd/spiderman-marvel.gif" class="floating-img img-top-left" alt="Homem-Aranha" />
-  <img src="https://media.tenor.com/Yzz_tsmzXG4AAAAC/hulk-smash.gif" class="floating-img img-top-right" alt="Hulk" />
-  <img src="https://media.tenor.com/3shOGVR1uAkAAAAd/superman.gif" class="floating-img img-bottom-left" alt="Superman" />
-  <img src="https://media.tenor.com/uV2fZBBvO4wAAAAd/marvel-avengers.gif" class="floating-img img-bottom-right" alt="Heróis" />
 
   <section>
     <h1>Bem-vindo à MASTER NET</h1>
@@ -152,16 +129,20 @@
     <p><strong>Para adicionar mais telas, fale com nosso suporte via WhatsApp. O valor aumenta por ponto extra.</strong></p>
     <div class="products">
       <div class="product">
+        <p>Teste Grátis</p>
+        <a href="https://wa.me/5519996804873?text=Gostaria%20de%20ativar%20o%20meu%20teste%20gr%C3%A1tis" style="background-color: #00b300;">Ativar Agora</a>
+      </div>
+      <div class="product">
         <p>Plano 1 Mês - R$35,00</p>
-        <a href="https://wa.me/5519996804873?text=Quero%20ativar%20o%20meu%20plano%20de%201%20m%C3%AAs">Ativar Agora</a>
+        <a href="https://wa.me/5519996804873?text=Gostaria%20de%20comprar%20o%20plano%20de%201%20m%C3%AAs">Comprar Agora</a>
       </div>
       <div class="product">
         <p>Plano 2 Meses - R$60,00</p>
-        <a href="https://wa.me/5519996804873?text=Quero%20ativar%20o%20meu%20plano%20de%202%20meses">Ativar Agora</a>
+        <a href="https://wa.me/5519996804873?text=Gostaria%20de%20comprar%20o%20plano%20de%202%20meses">Comprar Agora</a>
       </div>
       <div class="product">
         <p>Plano 4 Meses - R$100,00</p>
-        <a href="https://wa.me/5519996804873?text=Quero%20ativar%20o%20meu%20plano%20de%204%20meses">Ativar Agora</a>
+        <a href="https://wa.me/5519996804873?text=Gostaria%20de%20comprar%20o%20plano%20de%204%20meses">Comprar Agora</a>
       </div>
     </div>
   </section>
@@ -169,7 +150,11 @@
   <section>
     <h2>Formas de Pagamento</h2>
     <div class="pix-section">
-      <p>Aceitamos apenas PIX. Após o pagamento, clique no ícone do WhatsApp para ativar seu plano.</p>
+      <p>Aceitamos <strong>PIX</strong> e <strong>Cartão</strong>. Após o pagamento, clique no ícone do WhatsApp para ativar seu plano.</p>
+      <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Pix_Logo.svg/320px-Pix_Logo.svg.png" alt="PIX" />
+        <img src="https://cdn-icons-png.flaticon.com/512/633/633611.png" alt="Cartão" />
+      </div>
     </div>
   </section>
 
