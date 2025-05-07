@@ -2,220 +2,78 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MASTER NET - IPTV</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master Net</title>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDkzu7El2JNbQA7kflKjNX8DdsAibG7uGU",
+      authDomain: "site-467da.firebaseapp.com",
+      databaseURL: "https://site-467da-default-rtdb.firebaseio.com",
+      projectId: "site-467da",
+      storageBucket: "site-467da.appspot.com",
+      messagingSenderId: "749496526421",
+      appId: "1:749496526421:web:53d7d52bfcdc04b0be96dc",
+      measurementId: "G-F932J7Z078"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    function submitComment() {
+      const commentInput = document.getElementById('commentInput');
+      const commentText = commentInput.value.trim();
+      if (commentText) {
+        push(ref(database, 'comments'), {
+          text: commentText,
+          timestamp: Date.now()
+        });
+        commentInput.value = '';
+      }
+    }
+
+    const commentsList = document.getElementById('commentsList');
+    onChildAdded(ref(database, 'comments'), (data) => {
+      const li = document.createElement('li');
+      li.textContent = data.val().text;
+      commentsList.appendChild(li);
+    });
+
+    window.submitComment = submitComment;
+  </script>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
-    }
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-    section {
-      padding: 2rem 1rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    h1, h2 {
-      color: #e60000;
-    }
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-    }
-    .product {
-      background: rgba(0, 0, 0, 0.8);
-      border: 1px solid #e60000;
-      padding: 1rem;
-      width: 280px;
-      border-radius: 8px;
-      text-align: center;
-    }
-    .product a {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background-color: #e60000;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-    .pix-section {
-      background: rgba(0, 0, 0, 0.8);
-      padding: 1rem;
-      border: 1px solid #e60000;
-      text-align: center;
-      border-radius: 8px;
-    }
-    .pix-section img {
-      height: 60px;
-      margin: 0 10px;
-      vertical-align: middle;
-    }
-    .popup-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 9999;
-    }
-    .popup-btn a {
-      background-color: #e60000;
-      color: white;
-      text-decoration: none;
-      padding: 0.75rem 1rem;
-      border-radius: 50px;
-      font-weight: bold;
-      text-align: center;
-      box-shadow: 0 0 10px #e60000;
-    }
-    .feedbacks {
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 2rem 1rem;
-      border-top: 1px solid #e60000;
-      border-bottom: 1px solid #e60000;
-    }
-    .feedback {
-      background: #222;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    .feedback strong {
-      color: #e60000;
-    }
-    #comment-form input, #comment-form textarea {
-      width: 100%;
-      padding: 0.5rem;
-      margin-bottom: 0.5rem;
-      border-radius: 5px;
-      border: none;
-    }
-    #comment-form button {
-      background-color: #e60000;
-      border: none;
-      padding: 0.5rem 1rem;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 5px;
-    }
+    body { font-family: Arial, sans-serif; text-align: center; background: #000; color: white; margin: 0; padding: 0; }
+    .logo img { width: 250px; margin-top: 20px; }
+    .payments img { width: 200px; margin: 20px; }
+    .comments { margin-top: 40px; }
+    footer { margin-top: 50px; padding: 20px; font-size: 14px; color: gray; }
+    button { padding: 10px 20px; margin-top: 10px; }
+    input { padding: 10px; width: 300px; }
   </style>
 </head>
 <body>
-
-  <header>
-    <img src="logo.png" alt="MASTER NET Logo" style="height: 100px; margin-bottom: 1rem;" />
-    <h1>Bem-vindo à MASTER NET</h1>
-    <p>IPTV com qualidade máxima, atendimento rápido e planos acessíveis. Faça seu teste grátis ou ative agora!</p>
-  </header>
-
-  <section>
-    <h2>Planos & Produtos</h2>
-    <p>Todos os planos incluem:</p>
-    <ul>
-      <li>1 tela simultânea</li>
-      <li>Mesmo suporte via WhatsApp/Telegram</li>
-    </ul>
-    <p><strong>Para adicionar mais telas, fale com nosso suporte via WhatsApp. O valor aumenta por ponto extra.</strong></p>
-    <div class="products">
-      <div class="product">
-        <p>Teste Grátis</p>
-        <a href="https://wa.me/5519996804873?text=Gostaria%20de%20ativar%20o%20meu%20teste%20gr%C3%A1tis" style="background-color: #00b300;">Ativar Agora</a>
-      </div>
-      <div class="product">
-        <p>Plano 1 Mês - R$35,00</p>
-        <a href="https://wa.me/5519996804873?text=Gostaria%20de%20comprar%20o%20plano%20de%201%20m%C3%AAs">Comprar Agora</a>
-      </div>
-      <div class="product">
-        <p>Plano 2 Meses - R$60,00</p>
-        <a href="https://wa.me/5519996804873?text=Gostaria%20de%20comprar%20o%20plano%20de%202%20meses">Comprar Agora</a>
-      </div>
-      <div class="product">
-        <p>Plano 4 Meses - R$100,00</p>
-        <a href="https://wa.me/5519996804873?text=Gostaria%20de%20comprar%20o%20plano%20de%204%20meses">Comprar Agora</a>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Formas de Pagamento</h2>
-    <div class="pix-section">
-      <p>Aceitamos <strong>PIX</strong> e <strong>Cartão</strong>. Após o pagamento, clique no ícone do WhatsApp para ativar seu plano.</p>
-      <div>
-        <img src="pix.png" alt="PIX" />
-        <img src="card.png" alt="Cartão Visa MasterCard" />
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Dúvidas Frequentes - O que é IPTV?</h2>
-    <p><strong>IPTV</strong> é a sigla para "Internet Protocol Television", ou seja, transmissão de TV pela internet. Com IPTV, você pode assistir canais de TV ao vivo, filmes, séries e muito mais, diretamente pela sua conexão de internet — sem antenas, cabos ou burocracia.</p>
-    <p>Funciona em Smart TVs, celulares, TV Box, computadores e tablets. Basta ter um bom acesso à internet e pronto!</p>
-    <p>Vantagens:</p>
-    <ul>
-      <li>Mais de 5.000 canais</li>
-      <li>Atualizações automáticas</li>
-      <li>Qualidade HD/FHD/4K</li>
-      <li>Sem contratos ou fidelidade</li>
-    </ul>
-    <p>Ficou com dúvidas? Chama no WhatsApp ou Telegram que a gente te explica tudo!</p>
-  </section>
-
-  <section class="feedbacks">
-    <h2>💬 O que nossos clientes dizem (+1000 pessoas satisfeitas)</h2>
-    <div id="feedback-list">
-      <div class="feedback"><strong>Carlos M.:</strong> "Simplesmente o melhor IPTV que já usei! Qualidade top e suporte rápido."</div>
-      <div class="feedback"><strong>Juliana R.:</strong> "Fiz o teste grátis e ativei no mesmo dia. Funcionando liso na minha smart TV."</div>
-      <div class="feedback"><strong>Roberto L.:</strong> "Já testei vários, mas esse aqui me surpreendeu. Recomendo demais!"</div>
-      <div class="feedback"><strong>Mariana F.:</strong> "Atendimento super rápido. Vale cada centavo!"</div>
-      <div class="feedback"><strong>Eduardo S.:</strong> "Canais funcionando 24h sem travar. Muito melhor que TV a cabo."</div>
-    </div>
-    <form id="comment-form">
-      <input type="text" id="name" placeholder="Seu nome" required />
-      <textarea id="message" placeholder="Seu comentário" required></textarea>
-      <button type="submit">Enviar comentário</button>
-    </form>
-  </section>
-
-  <div class="popup-btn">
-    <a href="https://wa.me/5519996804873" target="_blank">💬 WhatsApp</a>
-    <a href="https://t.me/hteshtyh_bot" target="_blank">🤖 Telegram</a>
+  <div class="logo">
+    <img src="logo.png" alt="Logo Master Net">
   </div>
 
-  <script>
-    const feedbackList = document.getElementById("feedback-list");
-    const commentForm = document.getElementById("comment-form");
+  <div class="payments">
+    <img src="pix.png" alt="Pix">
+    <img src="cards.png" alt="Cartões de Crédito">
+  </div>
 
-    function createComment(name, message) {
-      const div = document.createElement("div");
-      div.className = "feedback";
-      div.innerHTML = `<strong>${name}:</strong> ${message}`;
-      feedbackList.prepend(div);
-    }
+  <div class="comments">
+    <h2>Comentários</h2>
+    <input type="text" id="commentInput" placeholder="Escreva um comentário...">
+    <br>
+    <button onclick="submitComment()">Enviar</button>
+    <ul id="commentsList" style="list-style:none; padding:0; margin-top:20px;"></ul>
+  </div>
 
-    commentForm.onsubmit = (e) => {
-      e.preventDefault();
-      const name = document.getElementById("name").value.trim();
-      const message = document.getElementById("message").value.trim();
-      if (name && message) {
-        createComment(name, message);
-        commentForm.reset();
-      }
-    };
-  </script>
-
+  <footer>
+    © 2025 Master Net. Todos os direitos reservados.
+  </footer>
 </body>
 </html>
