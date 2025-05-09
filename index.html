@@ -22,56 +22,52 @@
     .feedback strong { color: #e60000; }
     #comment-form input, #comment-form textarea { width: 100%; padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 5px; border: none; }
     #comment-form button { background-color: #e60000; border: none; padding: 0.5rem 1rem; color: white; font-weight: bold; cursor: pointer; border-radius: 5px; }
+    #chatbot { position: fixed; bottom: 90px; right: 20px; background: #111; border: 2px solid #e60000; padding: 1rem; border-radius: 12px; width: 300px; max-height: 400px; overflow-y: auto; display: none; z-index: 9999; }
+    #chatbot h3 { margin-top: 0; }
+    #chatbot img { width: 40px; vertical-align: middle; margin-right: 10px; }
+    #open-chatbot { background: #e60000; border-radius: 50px; padding: 10px; cursor: pointer; }
   </style>
 </head>
 <body>
 
 <header>
-  <img src="logo.png" alt="MASTER NET Logo" style="height: 100px; margin-bottom: 1rem;" />
+  <img src="logo.png" alt="MASTER NET Logo" style="height: 120px; margin-bottom: 1rem;" />
   <h1>Bem-vindo à MASTER NET</h1>
-  <p>IPTV com qualidade máxima, atendimento rápido e planos acessíveis. Faça seu teste grátis ou ative agora!</p>
+  <p>IPTV com qualidade máxima, atendimento rápido e planos acessíveis. Faça seu teste grátis 🎁 ou ative agora!</p>
 </header>
 
 <section>
   <h2>Planos & Produtos</h2>
-  <p>Todos os planos incluem:</p>
-  <ul>
-    <li>1 tela simultânea</li>
-    <li>Mesmo suporte via WhatsApp/Telegram</li>
-  </ul>
-  <p><strong>Para adicionar mais telas, fale com nosso suporte via WhatsApp. O valor aumenta por ponto extra.</strong></p>
   <div class="products">
-    <div class="product"><p>Teste Grátis</p><a href="https://wa.me/5519996804873?text=Gostaria%20de%20ativar%20o%20meu%20teste%20gr%C3%A1tis" style="background-color: #00b300;">Ativar Agora</a></div>
-    <div class="product"><p>Plano 1 Mês - R$35,00</p><a href="https://wa.me/5519996804873?text=Gostaria%20de%20comprar%20o%20plano%20de%201%20m%C3%AAs">Comprar Agora</a></div>
-    <div class="product"><p>Plano 2 Meses - R$60,00</p><a href="https://wa.me/5519996804873?text=Gostaria%20de%20comprar%20o%20plano%20de%202%20meses">Comprar Agora</a></div>
-    <div class="product"><p>Plano 4 Meses - R$100,00</p><a href="https://wa.me/5519996804873?text=Gostaria%20de%20comprar%20o%20plano%20de%204%20meses">Comprar Agora</a></div>
+    <div class="product"><p>Teste Grátis 🎁</p><a href="https://wa.me/5519996804873?text=Quero%20um%20teste%20gr%C3%A1tis">Ativar Agora</a></div>
+    <div class="product"><p>Plano 1 Mês - R$35,00</p><a href="https://wa.me/5519996804873?text=Quero%20comprar%20plano%20de%201%20m%C3%AAs">Comprar Agora</a></div>
+    <div class="product"><p>Plano 2 Meses - R$60,00</p><a href="https://wa.me/5519996804873?text=Quero%20comprar%20plano%20de%202%20meses">Comprar Agora</a></div>
+    <div class="product"><p>Plano 4 Meses - R$100,00</p><a href="https://wa.me/5519996804873?text=Quero%20comprar%20plano%20de%204%20meses">Comprar Agora</a></div>
   </div>
 </section>
 
 <section>
   <h2>Formas de Pagamento</h2>
   <div class="pix-section">
-    <p>Aceitamos <strong>PIX</strong> e <strong>Cartão</strong>. Após o pagamento, clique no ícone do WhatsApp para ativar seu plano.</p>
-    <div><img src="pix.png" alt="PIX" /><img src="card.png" alt="Cartão Visa MasterCard" /></div>
+    <p>Aceitamos <strong>PIX</strong> e <strong>Cartão</strong>. Após o pagamento, clique no WhatsApp para ativar seu plano.</p>
+    <div><img src="pix.png" alt="PIX" /><img src="card.png" alt="Cartão" /></div>
   </div>
 </section>
 
 <section>
-  <h2>Dúvidas Frequentes - O que é IPTV?</h2>
-  <p><strong>IPTV</strong> é a sigla para "Internet Protocol Television", ou seja, transmissão de TV pela internet...</p>
+  <h2>Dúvidas Frequentes</h2>
+  <p>Assista onde quiser: 📱 Celular, 📺 Smart TV, 💻 PC, 📦 TV Box!</p>
   <ul>
-    <li>Mais de 5.000 canais</li>
+    <li>Mais de 300 canais liberados!</li>
+    <li>Qualidade HD e Full HD</li>
     <li>Atualizações automáticas</li>
-    <li>Qualidade HD/FHD/4K</li>
-    <li>Sem contratos ou fidelidade</li>
+    <li>Sem contrato, sem fidelidade</li>
   </ul>
 </section>
 
 <section class="feedbacks">
-  <h2>💬 O que nossos clientes dizem (+1000 pessoas satisfeitas)</h2>
-  <div id="feedback-list">
-    <!-- Comentários serão carregados aqui -->
-  </div>
+  <h2>💬 O que nossos clientes dizem</h2>
+  <div id="feedback-list"></div>
   <form id="comment-form">
     <input type="text" id="name" placeholder="Seu nome" required />
     <textarea id="message" placeholder="Seu comentário" required></textarea>
@@ -80,11 +76,18 @@
 </section>
 
 <div class="popup-btn">
+  <div id="open-chatbot">🤖</div>
   <a href="https://wa.me/5519996804873" target="_blank">💬 WhatsApp</a>
-  <a href="https://t.me/hteshtyh_bot" target="_blank">🤖 Telegram</a>
 </div>
 
-<!-- Firebase SDK -->
+<div id="chatbot">
+  <h3><img src="logo.png" alt="Bot Logo" /> Robo MasterNet</h3>
+  <div id="chat-content">
+    <p>Olá! 👋 Sou o assistente da MASTER NET. Pergunte algo! 📲</p>
+  </div>
+</div>
+
+<!-- Firebase + Bot -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
   import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
@@ -113,8 +116,8 @@
     if (name && message) {
       const feedbackRef = ref(db, "feedbacks");
       push(feedbackRef, {
-        name: name,
-        message: message,
+        name,
+        message,
         timestamp: Date.now()
       });
       commentForm.reset();
@@ -129,6 +132,40 @@
     div.innerHTML = `<strong>${feedback.name}:</strong> ${feedback.message}`;
     feedbackList.prepend(div);
   });
+
+  // BOT CHAT
+  const openChatbot = document.getElementById("open-chatbot");
+  const chatbot = document.getElementById("chatbot");
+  const chatContent = document.getElementById("chat-content");
+
+  openChatbot.onclick = () => {
+    chatbot.style.display = chatbot.style.display === "none" ? "block" : "none";
+  };
+
+  chatbot.onclick = (e) => {
+    if (e.target.tagName === "BUTTON") {
+      const msg = e.target.dataset.msg;
+      addUserMessage(msg);
+      botResponse(msg);
+    }
+  };
+
+  function addUserMessage(msg) {
+    chatContent.innerHTML += `<p><strong>Você:</strong> ${msg}</p>`;
+  }
+
+  function botResponse(msg) {
+    let response = "Não entendi. Por favor, fale com nosso suporte via WhatsApp.";
+    const lower = msg.toLowerCase();
+    if (lower.includes("onde") || lower.includes("aparelho") || lower.includes("smart")) {
+      response = "📺 Funciona em celular, tablet, Smart TV, TV Box e PC.";
+    } else if (lower.includes("teste") || lower.includes("posso testar")) {
+      response = "🎁 Oferecemos teste grátis! Clique em TESTE GRÁTIS no site ou chame no WhatsApp.";
+    } else if (lower.includes("pagar") || lower.includes("pix") || lower.includes("cartão")) {
+      response = "💳 Aceitamos PIX e cartão! Pagamento rápido e seguro.";
+    }
+    chatContent.innerHTML += `<p><strong>Bot 🤖:</strong> ${response}</p>`;
+  }
 </script>
 
 </body>
