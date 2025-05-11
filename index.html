@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MASTER NET - IPTV</title>
-  <link rel="icon" href="logo.png" type="image/png" />
+  <link rel="icon" href="logo.png" type="image/png">
   <style>
     body { margin: 0; font-family: Arial, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
     header { text-align: center; padding: 2rem 1rem; }
@@ -21,10 +21,12 @@
     .feedback { background: #222; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
     .feedback strong { color: #e60000; }
     #chatbot { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; border: 2px solid #e60000; border-radius: 10px; width: 320px; max-height: 500px; padding: 1rem; z-index: 99999; }
-    #chat-content { max-height: 300px; overflow-y: auto; }
+    #chat-content { max-height: 250px; overflow-y: auto; }
     #chat-input { width: 100%; margin-top: 10px; display: flex; }
     #chat-input input { flex: 1; padding: 0.5rem; border: none; border-radius: 5px 0 0 5px; }
     #chat-input button { padding: 0.5rem; background: #e60000; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer; }
+    #suggestions { margin-bottom: 10px; }
+    #suggestions button { margin: 2px; padding: 0.5rem; background: #e60000; color: white; border: none; border-radius: 5px; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -77,6 +79,13 @@
 
 <div id="chatbot">
   <h3>🤖 Bot MasterNet</h3>
+  <div id="suggestions">
+    <button onclick="quickReply('Onde posso assistir?')">📺 Onde assistir?</button>
+    <button onclick="quickReply('Quero teste grátis')">🎁 Teste grátis</button>
+    <button onclick="quickReply('Formas de pagamento')">💳 Pagamento</button>
+    <button onclick="quickReply('Atualizações automáticas')">🔄 Atualizações</button>
+    <button onclick="quickReply('Promoções atuais')">🎯 Promoções</button>
+  </div>
   <div id="chat-content"></div>
   <div id="chat-input">
     <input type="text" id="user-message" placeholder="Digite sua pergunta...">
@@ -84,91 +93,91 @@
   </div>
 </div>
 
-<!-- Firebase SDK + Bot Scripts -->
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
+
 <script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyDkzu7El2JNbQA7kflKjNX8DdsAibG7uGU",
-    authDomain: "site-467da.firebaseapp.com",
-    databaseURL: "https://site-467da-default-rtdb.firebaseio.com",
-    projectId: "site-467da",
-    storageBucket: "site-467da.appspot.com",
-    messagingSenderId: "749496526421",
-    appId: "1:749496526421:web:53d7d52bfcdc04b0be96dc",
-    measurementId: "G-F932J7Z078"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const database = firebase.database();
+const firebaseConfig = {
+  apiKey: "AIzaSyDkzu7El2JNbQA7kflKjNX8DdsAibG7uGU",
+  authDomain: "site-467da.firebaseapp.com",
+  databaseURL: "https://site-467da-default-rtdb.firebaseio.com",
+  projectId: "site-467da",
+  storageBucket: "site-467da.appspot.com",
+  messagingSenderId: "749496526421",
+  appId: "1:749496526421:web:53d7d52bfcdc04b0be96dc",
+  measurementId: "G-F932J7Z078"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const database = firebase.database();
 
-  const loginBtn = document.getElementById("login-btn");
-  const commentSection = document.getElementById("comment-section");
-  const loginSection = document.getElementById("login-section");
-  const nameInput = document.getElementById("name");
+// Login Google
+document.getElementById('login-btn').onclick = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider);
+};
 
-  loginBtn.onclick = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider);
-  };
-
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      loginSection.style.display = "none";
-      commentSection.style.display = "block";
-      nameInput.value = user.displayName;
-    }
-  });
-
-  document.getElementById("comment-form").onsubmit = (e) => {
-    e.preventDefault();
-    const name = nameInput.value.trim();
-    const message = document.getElementById("message").value.trim();
-    if (name && message) {
-      database.ref("feedbacks").push({ name, message, timestamp: Date.now() });
-      document.getElementById("comment-form").reset();
-    }
-  };
-
-  const feedbackRef = database.ref("feedbacks");
-  feedbackRef.on("child_added", (snapshot) => {
-    const feedback = snapshot.val();
-    const div = document.createElement("div");
-    div.className = "feedback";
-    div.innerHTML = `<strong>${feedback.name}:</strong> ${feedback.message}`;
-    document.getElementById("feedback-list").prepend(div);
-  });
-
-  // BOT AJUDA
-  const chatbot = document.getElementById("chatbot");
-  document.getElementById("open-chatbot").onclick = () => {
-    chatbot.style.display = chatbot.style.display === "none" ? "block" : "none";
-  };
-
-  function sendMessage() {
-    const userMessage = document.getElementById("user-message").value.toLowerCase();
-    const chatContent = document.getElementById("chat-content");
-
-    chatContent.innerHTML += `<p><strong>Você:</strong> ${userMessage}</p>`;
-
-    let botReply = "";
-    if (userMessage.includes("assistir") || userMessage.includes("aparelhos")) {
-      botReply = "📺 Funciona no celular, tablet, Smart TV, TV Box e PC!";
-    } else if (userMessage.includes("teste")) {
-      botReply = "🎁 Temos teste grátis! Clique no WhatsApp para ativar!";
-    } else if (userMessage.includes("pagar") || userMessage.includes("pix") || userMessage.includes("cartão")) {
-      botReply = "💳 Aceitamos PIX e Cartão de Crédito.";
-    } else {
-      botReply = "❌ Não entendi! Fale com nosso suporte via WhatsApp.";
-      setTimeout(() => {
-        window.open('https://wa.me/5519996804873', '_blank');
-      }, 2000);
-    }
-
-    chatContent.innerHTML += `<p><strong>Bot:</strong> ${botReply}</p>`;
-    document.getElementById("user-message").value = "";
+auth.onAuthStateChanged(user => {
+  if (user) {
+    document.getElementById('login-section').style.display = "none";
+    document.getElementById('comment-section').style.display = "block";
+    document.getElementById('name').value = user.displayName;
   }
+});
+
+// Comentários
+document.getElementById('comment-form').onsubmit = e => {
+  e.preventDefault();
+  const name = document.getElementById('name').value;
+  const message = document.getElementById('message').value;
+  database.ref("feedbacks").push({ name, message, timestamp: Date.now() });
+  document.getElementById('comment-form').reset();
+};
+
+database.ref("feedbacks").on("child_added", snapshot => {
+  const feedback = snapshot.val();
+  const div = document.createElement("div");
+  div.className = "feedback";
+  div.innerHTML = `<strong>${feedback.name}:</strong> ${feedback.message}`;
+  document.getElementById("feedback-list").prepend(div);
+});
+
+// Chatbot
+document.getElementById('open-chatbot').onclick = () => {
+  const chatbot = document.getElementById('chatbot');
+  chatbot.style.display = chatbot.style.display === 'block' ? 'none' : 'block';
+};
+
+function quickReply(msg) {
+  document.getElementById('user-message').value = msg;
+  sendMessage();
+}
+
+function sendMessage() {
+  const userMessage = document.getElementById("user-message").value.toLowerCase();
+  const chatContent = document.getElementById("chat-content");
+  chatContent.innerHTML += `<p><strong>Você:</strong> ${userMessage}</p>`;
+
+  let reply = "❌ Não entendi! Vou te levar ao WhatsApp.";
+  if (userMessage.includes("assistir") || userMessage.includes("onde")) {
+    reply = "📺 Funciona em celular, tablet, Smart TV, TV Box e PC!";
+  } else if (userMessage.includes("teste") || userMessage.includes("grátis")) {
+    reply = "🎁 Temos teste grátis!";
+    setTimeout(() => {
+      window.open('https://wa.me/5519996804873?text=Quero%20teste%20grátis', '_blank');
+    }, 2000);
+  } else if (userMessage.includes("pagar") || userMessage.includes("pix") || userMessage.includes("cartão")) {
+    reply = "💳 Aceitamos pagamento via PIX e Cartão!";
+  } else if (userMessage.includes("atualiza") || userMessage.includes("atualizações")) {
+    reply = "🔄 Temos atualizações automáticas incluídas!";
+  } else if (userMessage.includes("promoção") || userMessage.includes("promoções")) {
+    reply = "🎯 Consulte nossas promoções no WhatsApp!";
+  }
+
+  chatContent.innerHTML += `<p><strong>Bot:</strong> ${reply}</p>`;
+  document.getElementById("user-message").value = "";
+}
 </script>
 
 </body>
