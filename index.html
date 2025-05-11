@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MASTER NET - IPTV</title>
-  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="icon" href="logo.png" type="image/png" />
   <style>
     body { margin: 0; font-family: Arial, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
     header { text-align: center; padding: 2rem 1rem; }
@@ -37,39 +37,32 @@
 
 <section>
   <h2>Planos & Produtos</h2>
-  <p>Todos os planos incluem:</p>
-  <ul>
-    <li>1 tela simultânea</li>
-    <li>Mesmo suporte via WhatsApp/Telegram</li>
-  </ul>
   <div class="products">
-    <div class="product"><p>Teste Grátis 🎁</p><a href="https://wa.me/5519996804873?text=Quero%20meu%20teste%20grátis" style="background-color: #00b300;">Ativar Agora</a></div>
-    <div class="product"><p>Plano 1 Mês - R$35,00</p><a href="https://wa.me/5519996804873?text=Comprar%20plano%201%20mês" class="btn">Comprar Agora</a></div>
-    <div class="product"><p>Plano 2 Meses - R$60,00</p><a href="https://wa.me/5519996804873?text=Comprar%20plano%202%20meses" class="btn">Comprar Agora</a></div>
-    <div class="product"><p>Plano 4 Meses - R$100,00</p><a href="https://wa.me/5519996804873?text=Comprar%20plano%204%20meses" class="btn">Comprar Agora</a></div>
+    <div class="product"><p>Teste Grátis 🎁</p><a href="https://wa.me/5519996804873?text=Quero%20teste%20grátis" style="background-color: #00b300;">Ativar Agora</a></div>
+    <div class="product"><p>Plano 1 Mês - R$35,00</p><a href="https://wa.me/5519996804873?text=Comprar%20plano%201%20mês">Comprar Agora</a></div>
+    <div class="product"><p>Plano 2 Meses - R$60,00</p><a href="https://wa.me/5519996804873?text=Comprar%20plano%202%20meses">Comprar Agora</a></div>
+    <div class="product"><p>Plano 4 Meses - R$100,00</p><a href="https://wa.me/5519996804873?text=Comprar%20plano%204%20meses">Comprar Agora</a></div>
   </div>
 </section>
 
 <section>
   <h2>Formas de Pagamento</h2>
   <div class="pix-section">
-    <p>Aceitamos <strong>PIX</strong> e <strong>Cartão</strong>. Após o pagamento, clique no WhatsApp para ativar seu plano.</p>
-    <div><img src="pix.png" alt="PIX" /><img src="card.png" alt="Cartão" /></div>
+    <p>Aceitamos <strong>PIX</strong> e <strong>Cartão</strong>. Clique no WhatsApp para ativar seu plano.</p>
+    <div><img src="pix.png" alt="PIX"><img src="card.png" alt="Cartão"></div>
   </div>
 </section>
 
 <section class="feedbacks">
   <h2>💬 Comentários</h2>
   <div id="login-section">
-    <button id="login-btn" style="background-color:#e60000; border:none; padding:0.7rem 1.5rem; color:white; border-radius:5px; font-weight:bold; cursor:pointer;">
-      🔐 Fazer Login com Google para comentar
-    </button>
+    <button id="login-btn">🔐 Fazer Login com Google para comentar</button>
   </div>
 
   <div id="comment-section" style="display:none;">
     <div id="feedback-list"></div>
     <form id="comment-form">
-      <input type="text" id="name" placeholder="Seu nome" readonly required />
+      <input type="text" id="name" placeholder="Seu nome" readonly required>
       <textarea id="message" placeholder="Seu comentário" required></textarea>
       <button type="submit">Enviar Comentário</button>
     </form>
@@ -91,12 +84,11 @@
   </div>
 </div>
 
-<!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-  import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-  import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-
+<!-- Firebase SDK + Bot Scripts -->
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
+<script>
   const firebaseConfig = {
     apiKey: "AIzaSyDkzu7El2JNbQA7kflKjNX8DdsAibG7uGU",
     authDomain: "site-467da.firebaseapp.com",
@@ -107,62 +99,50 @@
     appId: "1:749496526421:web:53d7d52bfcdc04b0be96dc",
     measurementId: "G-F932J7Z078"
   };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const database = firebase.database();
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getDatabase(app);
-  const provider = new GoogleAuthProvider();
-
-  const loginSection = document.getElementById('login-section');
-  const commentSection = document.getElementById('comment-section');
-  const loginBtn = document.getElementById('login-btn');
-  const nameInput = document.getElementById('name');
+  const loginBtn = document.getElementById("login-btn");
+  const commentSection = document.getElementById("comment-section");
+  const loginSection = document.getElementById("login-section");
+  const nameInput = document.getElementById("name");
 
   loginBtn.onclick = () => {
-    signInWithPopup(auth, provider).catch((error) => {
-      console.error(error.message);
-    });
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider);
   };
 
-  onAuthStateChanged(auth, (user) => {
+  auth.onAuthStateChanged((user) => {
     if (user) {
       loginSection.style.display = "none";
       commentSection.style.display = "block";
       nameInput.value = user.displayName;
-    } else {
-      loginSection.style.display = "block";
-      commentSection.style.display = "none";
     }
   });
 
-  const feedbackList = document.getElementById("feedback-list");
-  const commentForm = document.getElementById("comment-form");
-
-  commentForm.onsubmit = (e) => {
+  document.getElementById("comment-form").onsubmit = (e) => {
     e.preventDefault();
     const name = nameInput.value.trim();
     const message = document.getElementById("message").value.trim();
     if (name && message) {
-      const feedbackRef = ref(db, "feedbacks");
-      push(feedbackRef, { name: name, message: message, timestamp: Date.now() });
-      commentForm.reset();
+      database.ref("feedbacks").push({ name, message, timestamp: Date.now() });
+      document.getElementById("comment-form").reset();
     }
   };
 
-  const feedbackRef = ref(db, "feedbacks");
-  onChildAdded(feedbackRef, (data) => {
-    const feedback = data.val();
+  const feedbackRef = database.ref("feedbacks");
+  feedbackRef.on("child_added", (snapshot) => {
+    const feedback = snapshot.val();
     const div = document.createElement("div");
     div.className = "feedback";
     div.innerHTML = `<strong>${feedback.name}:</strong> ${feedback.message}`;
-    feedbackList.prepend(div);
+    document.getElementById("feedback-list").prepend(div);
   });
 
-  // Chatbot
+  // BOT AJUDA
   const chatbot = document.getElementById("chatbot");
-  const openChatbot = document.getElementById("open-chatbot");
-
-  openChatbot.onclick = () => {
+  document.getElementById("open-chatbot").onclick = () => {
     chatbot.style.display = chatbot.style.display === "none" ? "block" : "none";
   };
 
@@ -174,23 +154,19 @@
 
     let botReply = "";
     if (userMessage.includes("assistir") || userMessage.includes("aparelhos")) {
-      botReply = "📺 Funciona em celular, tablet, Smart TV, TV Box e PC!";
+      botReply = "📺 Funciona no celular, tablet, Smart TV, TV Box e PC!";
     } else if (userMessage.includes("teste")) {
-      botReply = "🎁 Temos teste grátis! Clique no WhatsApp para ativar.";
+      botReply = "🎁 Temos teste grátis! Clique no WhatsApp para ativar!";
     } else if (userMessage.includes("pagar") || userMessage.includes("pix") || userMessage.includes("cartão")) {
-      botReply = "💳 Aceitamos PIX e Cartão.";
+      botReply = "💳 Aceitamos PIX e Cartão de Crédito.";
     } else {
-      botReply = "❌ Não entendi! Clique no botão WhatsApp para falar com um atendente.";
-    }
-
-    chatContent.innerHTML += `<p><strong>Bot:</strong> ${botReply}</p>`;
-
-    if (botReply.includes("não entendi")) {
+      botReply = "❌ Não entendi! Fale com nosso suporte via WhatsApp.";
       setTimeout(() => {
         window.open('https://wa.me/5519996804873', '_blank');
       }, 2000);
     }
 
+    chatContent.innerHTML += `<p><strong>Bot:</strong> ${botReply}</p>`;
     document.getElementById("user-message").value = "";
   }
 </script>
