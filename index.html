@@ -3,182 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MASTER NET - IPTV</title>
-  <link rel="icon" href="logo.png" type="image/png">
+  <title>Pagamento - Masteri</title>
+
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
-    header { text-align: center; padding: 2rem 1rem; }
-    section { padding: 2rem 1rem; max-width: 900px; margin: 0 auto; }
-    h1, h2 { color: #e60000; }
-    .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
-    .product { background: rgba(0,0,0,0.8); border: 1px solid #e60000; padding: 1rem; width: 280px; border-radius: 8px; text-align: center; }
-    .product a { display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem; background-color: #e60000; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; }
-    .pix-section { background: rgba(0,0,0,0.8); padding: 1rem; border: 1px solid #e60000; text-align: center; border-radius: 8px; }
-    .pix-section img { height: 60px; margin: 0 10px; vertical-align: middle; }
-    .popup-btn { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 9999; }
-    .popup-btn a, #open-chatbot { background-color: #e60000; color: white; text-decoration: none; padding: 0.75rem 1rem; border-radius: 50px; font-weight: bold; text-align: center; box-shadow: 0 0 10px #e60000; cursor: pointer; }
-    .feedbacks { background-color: rgba(0,0,0,0.8); padding: 2rem 1rem; border-top: 1px solid #e60000; border-bottom: 1px solid #e60000; }
-    .feedback { background: #222; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
-    .feedback strong { color: #e60000; }
-    #chatbot { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; border: 2px solid #e60000; border-radius: 10px; width: 320px; max-height: 500px; padding: 1rem; z-index: 99999; }
-    #chat-content { max-height: 250px; overflow-y: auto; }
-    #chat-input { width: 100%; margin-top: 10px; display: flex; }
-    #chat-input input { flex: 1; padding: 0.5rem; border: none; border-radius: 5px 0 0 5px; }
-    #chat-input button { padding: 0.5rem; background: #e60000; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer; }
-    #suggestions { margin-bottom: 10px; }
-    #suggestions button { margin: 2px; padding: 0.5rem; background: #e60000; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #111827;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      width: 300px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #9ca3af;
+      margin-bottom: 25px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: #00ff88;
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #00cc6a;
+      transform: scale(1.05);
+    }
+
+    .pix {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #22c55e;
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <img src="logo.png" alt="MASTER NET Logo" style="height: 120px; margin-bottom: 1rem;">
-  <h1>Bem-vindo à MASTER NET</h1>
-  <p>IPTV com qualidade máxima, atendimento rápido e planos acessíveis. Faça seu teste grátis 🎁 ou ative agora!</p>
-</header>
+  <div class="container">
+    <h1>Pagamento</h1>
+    <p>Clique abaixo para pagar com Pix</p>
 
-<section>
-  <h2>Planos & Produtos</h2>
-  <div class="products">
-    <div class="product"><p>Teste Grátis 🎁</p><a href="https://wa.me/5519996804873?text=Quero%20teste%20grátis" style="background-color: #00b300;">Ativar Agora</a></div>
-    <div class="product"><p>Plano 1 Mês - R$35,00</p><a href="https://wa.me/5519996804873?text=Comprar%20plano%201%20mês">Comprar Agora</a></div>
-    <div class="product"><p>Plano 2 Meses - R$60,00</p><a href="https://wa.me/5519996804873?text=Comprar%20plano%202%20meses">Comprar Agora</a></div>
-    <div class="product"><p>Plano 4 Meses - R$100,00</p><a href="https://wa.me/5519996804873?text=Comprar%20plano%204%20meses">Comprar Agora</a></div>
-  </div>
-</section>
+    <button onclick="pagar()">
+      💰 Pagar com Pix
+    </button>
 
-<section>
-  <h2>Formas de Pagamento</h2>
-  <div class="pix-section">
-    <p>Aceitamos <strong>PIX</strong> e <strong>Cartão</strong>. Clique no WhatsApp para ativar seu plano.</p>
-    <div><img src="pix.png" alt="PIX"><img src="card.png" alt="Cartão"></div>
-  </div>
-</section>
-
-<section class="feedbacks">
-  <h2>💬 Comentários</h2>
-  <div id="login-section">
-    <button id="login-btn">🔐 Fazer Login com Google para comentar</button>
+    <div class="pix">
+      Pagamento seguro via Mercado Pago
+    </div>
   </div>
 
-  <div id="comment-section" style="display:none;">
-    <div id="feedback-list"></div>
-    <form id="comment-form">
-      <input type="text" id="name" placeholder="Seu nome" readonly required>
-      <textarea id="message" placeholder="Seu comentário" required></textarea>
-      <button type="submit">Enviar Comentário</button>
-    </form>
-  </div>
-</section>
-
-<div class="popup-btn">
-  <div id="open-chatbot">🤖 Ajuda</div>
-  <a href="https://wa.me/5519996804873" target="_blank">💬 WhatsApp</a>
-  <a href="https://t.me/hteshtyh_bot" target="_blank">📢 Telegram</a>
-</div>
-
-<div id="chatbot">
-  <h3>🤖 Bot MasterNet</h3>
-  <div id="suggestions">
-    <button onclick="quickReply('Onde posso assistir?')">📺 Onde assistir?</button>
-    <button onclick="quickReply('Quero teste grátis')">🎁 Teste grátis</button>
-    <button onclick="quickReply('Formas de pagamento')">💳 Pagamento</button>
-    <button onclick="quickReply('Atualizações automáticas')">🔄 Atualizações</button>
-    <button onclick="quickReply('Promoções atuais')">🎯 Promoções</button>
-  </div>
-  <div id="chat-content"></div>
-  <div id="chat-input">
-    <input type="text" id="user-message" placeholder="Digite sua pergunta...">
-    <button onclick="sendMessage()">Enviar</button>
-  </div>
-</div>
-
-<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
-
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyDkzu7El2JNbQA7kflKjNX8DdsAibG7uGU",
-  authDomain: "site-467da.firebaseapp.com",
-  databaseURL: "https://site-467da-default-rtdb.firebaseio.com",
-  projectId: "site-467da",
-  storageBucket: "site-467da.appspot.com",
-  messagingSenderId: "749496526421",
-  appId: "1:749496526421:web:53d7d52bfcdc04b0be96dc",
-  measurementId: "G-F932J7Z078"
-};
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const database = firebase.database();
-
-// Login Google
-document.getElementById('login-btn').onclick = () => {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider);
-};
-
-auth.onAuthStateChanged(user => {
-  if (user) {
-    document.getElementById('login-section').style.display = "none";
-    document.getElementById('comment-section').style.display = "block";
-    document.getElementById('name').value = user.displayName;
-  }
-});
-
-// Comentários
-document.getElementById('comment-form').onsubmit = e => {
-  e.preventDefault();
-  const name = document.getElementById('name').value;
-  const message = document.getElementById('message').value;
-  database.ref("feedbacks").push({ name, message, timestamp: Date.now() });
-  document.getElementById('comment-form').reset();
-};
-
-database.ref("feedbacks").on("child_added", snapshot => {
-  const feedback = snapshot.val();
-  const div = document.createElement("div");
-  div.className = "feedback";
-  div.innerHTML = `<strong>${feedback.name}:</strong> ${feedback.message}`;
-  document.getElementById("feedback-list").prepend(div);
-});
-
-// Chatbot
-document.getElementById('open-chatbot').onclick = () => {
-  const chatbot = document.getElementById('chatbot');
-  chatbot.style.display = chatbot.style.display === 'block' ? 'none' : 'block';
-};
-
-function quickReply(msg) {
-  document.getElementById('user-message').value = msg;
-  sendMessage();
-}
-
-function sendMessage() {
-  const userMessage = document.getElementById("user-message").value.toLowerCase();
-  const chatContent = document.getElementById("chat-content");
-  chatContent.innerHTML += `<p><strong>Você:</strong> ${userMessage}</p>`;
-
-  let reply = "❌ Não entendi! Vou te levar ao WhatsApp.";
-  if (userMessage.includes("assistir") || userMessage.includes("onde")) {
-    reply = "📺 Funciona em celular, tablet, Smart TV, TV Box e PC!";
-  } else if (userMessage.includes("teste") || userMessage.includes("grátis")) {
-    reply = "🎁 Temos teste grátis!";
-    setTimeout(() => {
-      window.open('https://wa.me/5519996804873?text=Quero%20teste%20grátis', '_blank');
-    }, 2000);
-  } else if (userMessage.includes("pagar") || userMessage.includes("pix") || userMessage.includes("cartão")) {
-    reply = "💳 Aceitamos pagamento via PIX e Cartão!";
-  } else if (userMessage.includes("atualiza") || userMessage.includes("atualizações")) {
-    reply = "🔄 Temos atualizações automáticas incluídas!";
-  } else if (userMessage.includes("promoção") || userMessage.includes("promoções")) {
-    reply = "🎯 Consulte nossas promoções no WhatsApp!";
-  }
-
-  chatContent.innerHTML += `<p><strong>Bot:</strong> ${reply}</p>`;
-  document.getElementById("user-message").value = "";
-}
-</script>
+  <script>
+    function pagar() {
+      window.open("https://link.mercadopago.com.br/masteri", "_blank");
+    }
+  </script>
 
 </body>
 </html>
