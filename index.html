@@ -17,25 +17,23 @@
 
     /* Planos */
     .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-    .product { background: var(--card); border: 2px solid var(--primary); padding: 20px; width: 280px; border-radius: 15px; text-align: center; transition: 0.3s; }
+    .product { background: var(--card); border: 2px solid var(--primary); padding: 20px; width: 280px; border-radius: 15px; text-align: center; transition: 0.3s; position: relative; }
     .product:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(230, 0, 0, 0.3); }
     .price { font-size: 2.2rem; font-weight: 900; color: var(--primary); margin: 15px 0; }
     
     .btn-pix { background: var(--primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; margin-bottom: 8px; }
     .btn-paid { background: transparent; color: var(--secondary); border: 1px solid var(--secondary); padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.9rem; text-decoration: none; display: inline-block; box-sizing: border-box; }
 
-    /* SEÇÃO FORMAS DE PAGAMENTO - APENAS PIX, VISA E MASTER */
+    /* Estilo para o input de dispositivo */
+    .device-input { width: 100%; padding: 8px; margin-top: 10px; border-radius: 5px; border: 1px solid #444; background: #000; color: #fff; box-sizing: border-box; font-size: 0.8rem; }
+
+    /* Pagamentos */
     .payments { background: #0a0a0a; padding: 3rem 1rem; border-radius: 15px; text-align: center; margin: 2rem auto; border: 1px solid #333; }
     .payment-icons { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; align-items: center; }
     .pay-item { display: flex; flex-direction: column; align-items: center; gap: 15px; }
-    
-    /* Tamanhos grandes para as suas imagens */
     .pay-item img.img-pix { width: 100px; height: auto; }
     .pay-item img.img-card { width: 180px; height: auto; }
-    
-    .pay-item img { filter: drop-shadow(0 0 8px rgba(255,255,255,0.1)); transition: 0.3s; }
     .pay-item span { font-size: 1rem; font-weight: bold; color: #fff; letter-spacing: 1px; }
-    .pay-item:hover img { transform: scale(1.1); }
 
     /* Modal PIX */
     .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; backdrop-filter: blur(5px); }
@@ -65,26 +63,36 @@
 <section>
   <h2>💎 Escolha seu Plano</h2>
   <div class="products">
+    
     <div class="product">
-      <b>⚡ TESTE RÁPIDO</b>
-      <div class="price">R$ 0,10</div>
-      <button class="btn-pix" onclick="gerarPix('0.10', 'TESTE')">PAGAR PIX</button>
-      <a href="https://wa.me/5519996804873?text=Já paguei o Teste!" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
-    </div>
-
-    <div class="product">
-      <b>👑 PLANO MENSAL</b>
+      <b>⚡ 1 MÊS</b>
       <div class="price">R$ 35,00</div>
-      <button class="btn-pix" onclick="gerarPix('35.00', '1_MES')">PAGAR PIX</button>
-      <a href="https://wa.me/5519996804873?text=Já paguei o Mensal!" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
+      <button class="btn-pix" onclick="gerarPix('35.00', '1 MÊS')">PAGAR PIX</button>
+      <a href="https://wa.me/5519996804873?text=Olá! Acabei de pagar o plano de 1 MÊS (R$ 35,00). Segue o comprovante:" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
     </div>
 
     <div class="product">
-      <b>🔥 PLANO MASTER</b>
-      <div class="price">R$ 100,00</div>
-      <button class="btn-pix" onclick="gerarPix('100.00', '4_MESES')">PAGAR PIX</button>
-      <a href="https://wa.me/5519996804873?text=Já paguei o Master!" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
+      <b>👑 2 MESES</b>
+      <div class="price">R$ 60,00</div>
+      <button class="btn-pix" onclick="gerarPix('60.00', '2 MESES')">PAGAR PIX</button>
+      <a href="https://wa.me/5519996804873?text=Olá! Acabei de pagar o plano de 2 MESES (R$ 60,00). Segue o comprovante:" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
     </div>
+
+    <div class="product">
+      <b>🔥 4 MESES</b>
+      <div class="price">R$ 100,00</div>
+      <button class="btn-pix" onclick="gerarPix('100.00', '4 MESES')">PAGAR PIX</button>
+      <a href="https://wa.me/5519996804873?text=Olá! Acabei de pagar o plano de 4 MESES (R$ 100,00). Segue o comprovante:" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
+    </div>
+
+    <div class="product" style="border-color: var(--secondary);">
+      <b style="color: var(--secondary);">🎁 TESTE GRÁTIS</b>
+      <div class="price" style="color: var(--secondary);">R$ 0,00</div>
+      <a href="https://wa.me/5519996804873?text=Olá! Quero meu teste grátis de IPTV." target="_blank" class="btn-pix" style="background: var(--secondary); text-decoration: none; display: block;">QUERO MEU TESTE</a>
+      <input type="text" class="device-input" placeholder="Dispositivo que deseja usar o app">
+      <small style="display:block; margin-top:5px; font-size:10px; color:#888;">Insira o dispositivo que você deseja usar o app</small>
+    </div>
+
   </div>
 </section>
 
@@ -139,7 +147,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
 
 <script>
-// --- CONFIGURAÇÃO ---
 const firebaseConfig = {
   apiKey: "AIzaSyDkzu7El2JNbQA7kflKjNX8DdsAibG7uGU",
   authDomain: "site-467da.firebaseapp.com",
@@ -156,10 +163,7 @@ const db = firebase.database();
 
 function loginGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).catch(e => {
-      console.error(e);
-      alert("Erro ao logar. Verifique se o domínio está autorizado no Firebase.");
-  });
+  auth.signInWithPopup(provider).catch(e => alert("Erro ao logar. Verifique se o domínio está autorizado no Firebase."));
 }
 
 function logout() { auth.signOut(); }
@@ -186,8 +190,7 @@ db.ref('comments').limitToLast(10).on('child_added', snap => {
   document.getElementById('feedback-list').prepend(div);
 });
 
-// PIX
-function gerarPix(v, id) {
+function gerarPix(v, plano) {
     const val = parseFloat(v).toFixed(2);
     const p = "00020126360014BR.GOV.BCB.PIX011315a458f7-cb18-4179-a454-33eeadca9dca520400005303986540"+val.length+val+"5802BR5910MASTER NET6009SAO PAULO62070503***6304";
     document.getElementById('pix-code').value = p;
