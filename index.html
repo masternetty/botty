@@ -12,7 +12,7 @@
       margin: 0; font-family: 'Segoe UI', sans-serif; 
       background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('fundo.jpg'); 
       background-size: cover; background-position: center; background-attachment: fixed;
-      background-color: var(--bg); color: #fff; overflow: hidden; 
+      background-color: var(--bg); color: #fff; overflow-x: hidden; 
     }
 
     /* --- MOLDURA DA TV --- */
@@ -49,29 +49,31 @@
     header { text-align: center; padding: 2rem 1rem; }
     h1 { color: var(--primary); text-transform: uppercase; letter-spacing: 3px; margin: 0; }
     
-    /* --- SEÇÃO DE STREAMINGS COM CORES FIXAS --- */
+    /* --- SEÇÃO DE STREAMINGS --- */
     .streaming-list {
       text-align: center;
       margin: 20px 0;
       padding: 10px;
     }
     .streaming-list h3 {
-      font-size: 14px;
+      font-size: 16px;
       text-transform: uppercase;
       letter-spacing: 2px;
       color: #fff;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      font-weight: bold;
     }
     .streaming-logos {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px;
+      gap: 25px;
       flex-wrap: wrap;
+      padding: 0 20px;
     }
     .streaming-logos img {
       height: 35px;
-      /* Filtro grayscale removido para manter as cores originais */
+      /* Cores fixas (sem filtro grayscale) */
       filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
       transition: 0.3s;
     }
@@ -126,10 +128,11 @@
   <header><h1>MASTER NET IPTV 🚀</h1></header>
 
   <div class="streaming-list">
-    <h3>CONTEÚDO COMPLETO</h3>
+    <h3>TODOS STREAMINGS EM UM SÓ LUGAR</h3>
     <div class="streaming-logos">
       <img src="Netflix-new-icon.png" alt="Netflix">
       <img src="HBO-PNG-HD-Image.png" alt="HBO">
+      <img src="Disney-Plus-Logo-PNG-File.png" alt="Disney+">
       <img src="Prime_Video.png" alt="Prime Video">
       <img src="paramount-plus-1536.png" alt="Paramount">
       <img src="crunchyroll-logo-png_seeklogo-263159.png" alt="Crunchyroll">
