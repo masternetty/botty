@@ -6,69 +6,68 @@
   <title>MASTER NET - IPTV</title>
   <link rel="icon" href="logo.png" type="image/png">
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
+    body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
     header { text-align: center; padding: 2rem 1rem; }
-    section { padding: 2rem 1rem; max-width: 900px; margin: 0 auto; }
-    h1, h2 { color: #e60000; }
+    section { padding: 1rem 1rem; max-width: 900px; margin: 0 auto; }
+    h1, h2 { color: #e60000; text-transform: uppercase; }
     .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
-    .product { background: rgba(0,0,0,0.8); border: 1px solid #e60000; padding: 1rem; width: 280px; border-radius: 8px; text-align: center; }
-    .product p { margin: 10px 0; }
-    .product .btn-link { display: inline-block; margin-top: 5px; color: #bbb; text-decoration: underline; font-size: 12px; cursor: pointer; }
+    .product { background: rgba(20,20,20,0.9); border: 2px solid #e60000; padding: 1.5rem; width: 280px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(230,0,0,0.3); }
     
-    /* Botões de Ação */
-    .btn-pix { display: inline-block; margin-top: 1rem; padding: 0.7rem 1rem; background-color: #e60000; color: #fff; border-radius: 5px; font-weight: bold; border: none; cursor: pointer; width: 90%; transition: 0.3s; }
-    .btn-pix:hover { background-color: #ff1a1a; transform: scale(1.05); }
+    /* Botão de PIX */
+    .btn-pix { display: inline-block; margin-top: 1rem; padding: 0.8rem; background-color: #e60000; color: #fff; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; width: 100%; font-size: 1rem; }
+    .btn-pix:hover { background-color: #ff1a1a; transform: scale(1.02); }
+    .btn-link { display: block; margin-top: 10px; color: #888; text-decoration: none; font-size: 0.8rem; }
 
     /* Modal do QR Code */
-    #qr-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; border: 2px solid #e60000; padding: 20px; border-radius: 15px; z-index: 10000; text-align: center; width: 90%; max-width: 350px; box-shadow: 0 0 20px #e60000; }
-    #qr-modal img { width: 220px; height: 220px; background: #fff; padding: 10px; border-radius: 10px; margin: 10px 0; }
-    #qr-modal textarea { width: 100%; height: 70px; background: #222; color: #00ff00; border: 1px solid #444; padding: 8px; font-size: 11px; resize: none; border-radius: 5px; word-break: break-all; }
-    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; }
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; backdrop-filter: blur(5px); }
+    #qr-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; border: 2px solid #e60000; padding: 25px; border-radius: 20px; z-index: 10000; text-align: center; width: 90%; max-width: 350px; }
+    #qr-img { width: 220px; height: 220px; background: #fff; padding: 10px; border-radius: 10px; margin: 15px auto; display: block; }
+    #pix-code { width: 100%; height: 80px; background: #000; color: #00ff00; border: 1px solid #444; padding: 10px; font-size: 0.75rem; font-family: monospace; resize: none; border-radius: 8px; word-break: break-all; margin-bottom: 15px; }
     
-    .pix-section { background: rgba(0,0,0,0.8); padding: 1.5rem; border: 1px solid #e60000; text-align: center; border-radius: 8px; }
-    .popup-btn { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 9999; }
-    .popup-btn a { background-color: #25d366; color: white; text-decoration: none; padding: 0.75rem 1rem; border-radius: 50px; font-weight: bold; text-align: center; box-shadow: 0 0 10px #000; }
-    
-    .feedbacks { background-color: rgba(0,0,0,0.8); padding: 2rem 1rem; border-top: 1px solid #e60000; }
+    .btn-copy { background: #00b300; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
+    .btn-close { background: #333; color: white; border: none; padding: 10px; width: 100%; border-radius: 8px; cursor: pointer; margin-top: 8px; }
+
+    .feedbacks { background-color: rgba(10,10,10,0.9); padding: 2rem 1rem; border-top: 1px solid #e60000; }
     .feedback { background: #222; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; border-left: 4px solid #e60000; }
+    .popup-btn { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 9999; }
+    .popup-btn a { background-color: #25d366; color: white; text-decoration: none; padding: 15px 25px; border-radius: 50px; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
   </style>
 </head>
 <body>
 
 <header>
-  <img src="logo.png" alt="MASTER NET Logo" style="height: 120px; margin-bottom: 1rem;">
+  <img src="logo.png" alt="MASTER NET Logo" style="height: 100px; margin-bottom: 1rem;">
   <h1>MASTER NET IPTV</h1>
-  <p>Qualidade máxima. Escolha um plano e gere seu PIX agora!</p>
+  <p>Escolha seu plano e gere o PIX na hora!</p>
 </header>
 
 <section>
-  <h2>Planos & Produtos</h2>
   <div class="products">
     <div class="product">
       <p><b>Teste de Acesso</b></p>
-      <p style="font-size: 1.4rem; font-weight: bold; color: #e60000;">R$ 0,10</p>
-      <button class="btn-pix" onclick="gerarPix('0.10', 'Teste 10 Centavos')">Pagar com PIX</button>
+      <p style="font-size: 1.5rem; font-weight: 800; color: #e60000;">R$ 0,10</p>
+      <button class="btn-pix" onclick="gerarPix('0.10', 'TESTE')">GERAR PIX</button>
       <a href="https://mpago.la/22V7wWL" target="_blank" class="btn-link">Pagar via Cartão</a>
     </div>
 
     <div class="product">
       <p><b>Plano 1 Mês</b></p>
-      <p style="font-size: 1.4rem; font-weight: bold; color: #e60000;">R$ 35,00</p>
-      <button class="btn-pix" onclick="gerarPix('35.00', 'Plano 1 Mês')">Pagar com PIX</button>
+      <p style="font-size: 1.5rem; font-weight: 800; color: #e60000;">R$ 35,00</p>
+      <button class="btn-pix" onclick="gerarPix('35.00', '1MES')">GERAR PIX</button>
       <a href="https://mpago.la/2Y94v1R" target="_blank" class="btn-link">Pagar via Cartão</a>
     </div>
 
     <div class="product">
       <p><b>Plano 2 Meses</b></p>
-      <p style="font-size: 1.4rem; font-weight: bold; color: #e60000;">R$ 60,00</p>
-      <button class="btn-pix" onclick="gerarPix('60.00', 'Plano 2 Meses')">Pagar com PIX</button>
+      <p style="font-size: 1.5rem; font-weight: 800; color: #e60000;">R$ 60,00</p>
+      <button class="btn-pix" onclick="gerarPix('60.00', '2MESES')">GERAR PIX</button>
       <a href="https://mpago.la/2ZHZtoj" target="_blank" class="btn-link">Pagar via Cartão</a>
     </div>
 
     <div class="product">
       <p><b>Plano 4 Meses</b></p>
-      <p style="font-size: 1.4rem; font-weight: bold; color: #e60000;">R$ 100,00</p>
-      <button class="btn-pix" onclick="gerarPix('100.00', 'Plano 4 Meses')">Pagar com PIX</button>
+      <p style="font-size: 1.5rem; font-weight: 800; color: #e60000;">R$ 100,00</p>
+      <button class="btn-pix" onclick="gerarPix('100.00', '4MESES')">GERAR PIX</button>
       <a href="https://mpago.la/28h8M7b" target="_blank" class="btn-link">Pagar via Cartão</a>
     </div>
   </div>
@@ -76,12 +75,12 @@
 
 <div class="overlay" onclick="closeQR()"></div>
 <div id="qr-modal">
-  <h3 id="modal-titulo" style="color:#e60000; margin-top:0;">Pague com PIX</h3>
-  <img id="qr-img" src="" alt="QR Code PIX">
-  <p style="font-size:12px; margin-bottom: 5px;">Copia e Cola:</p>
-  <textarea id="pix-code" readonly onclick="this.select()"></textarea>
-  <button onclick="copyPix()" style="background:#00b300; color:white; border:none; padding:12px; width:100%; border-radius:5px; margin-top:10px; cursor:pointer; font-weight:bold;">COPIAR CÓDIGO PIX</button>
-  <button onclick="closeQR()" style="background:#444; color:white; border:none; padding:8px; width:100%; border-radius:5px; margin-top:5px; cursor:pointer;">FECHAR</button>
+  <h3 id="modal-titulo" style="margin: 0; color: #e60000;">Pagamento PIX</h3>
+  <img id="qr-img" src="" alt="Gerando QR Code...">
+  <p style="font-size: 0.8rem; color: #bbb; margin-bottom: 5px;">Código Copia e Cola:</p>
+  <textarea id="pix-code" readonly></textarea>
+  <button class="btn-copy" onclick="copyPix()">COPIAR CÓDIGO</button>
+  <button class="btn-close" onclick="closeQR()">CANCELAR</button>
 </div>
 
 <section class="feedbacks">
@@ -92,13 +91,13 @@
     <form id="comment-form">
       <input type="text" id="name" placeholder="Seu nome" readonly style="width:100%; margin-bottom:5px; padding:8px; background: #333; color: #fff; border: none;">
       <textarea id="message" placeholder="Seu comentário" required style="width:100%; height:60px; margin-bottom:5px; padding:8px; background: #333; color: #fff; border: none;"></textarea>
-      <button type="submit" style="background:#e60000; color:white; border:none; padding:10px; cursor:pointer; border-radius:5px; width:100%;">Enviar</button>
+      <button type="submit" style="background:#e60000; color:white; border:none; padding:10px; cursor:pointer; border-radius:5px; width:100%;">Enviar Comentário</button>
     </form>
   </div>
 </section>
 
 <div class="popup-btn">
-  <a href="https://wa.me/5519996804873" target="_blank">💬 Suporte WhatsApp</a>
+  <a href="https://wa.me/5519996804873" target="_blank">💬 WhatsApp</a>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
@@ -107,44 +106,48 @@
 
 <script>
 // --- CONFIGURAÇÃO PIX ---
-const CHAVE_PIX = "5519996804873";
+const CHAVE_PIX = "15a458f7-cb18-4179-a454-33eeadca9dca";
 const NOME_RECEBEDOR = "MASTER NET";
 const CIDADE_RECEBEDOR = "SAO PAULO";
 
-// Função para calcular CRC16 (Essencial para o PIX funcionar)
-function crc16(data) {
+// Função CRC16 CCITT (Essencial para o banco aceitar o PIX)
+function calcularCRC16(payload) {
     let crc = 0xFFFF;
-    for (let i = 0; i < data.length; i++) {
-        crc ^= data.charCodeAt(i) << 8;
+    const polynomial = 0x1021;
+    for (let i = 0; i < payload.length; i++) {
+        let b = payload.charCodeAt(i);
         for (let j = 0; j < 8; j++) {
-            if ((crc & 0x8000) !== 0) crc = (crc << 1) ^ 0x1021;
-            else crc <<= 1;
+            let bit = ((b >> (7 - j) & 1) === 1);
+            let c15 = ((crc >> 15 & 1) === 1);
+            crc <<= 1;
+            if (c15 ^ bit) crc ^= polynomial;
         }
     }
     return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
 }
 
-function gerarPix(valor, titulo) {
+function gerarPix(valor, idTransacao) {
     const v = parseFloat(valor).toFixed(2);
-    const txtValor = v.length.toString().padStart(2, '0') + v;
-    const txtChave = CHAVE_PIX.length.toString().padStart(2, '0') + CHAVE_PIX;
+    const f = (id, conteudo) => id + conteudo.length.toString().padStart(2, '0') + conteudo;
+
+    const infoConta = f('00', 'BR.GOV.BCB.PIX') + f('01', CHAVE_PIX);
     
-    // Payload PIX Estruturado
     let payload = "000201";
-    payload += "26" + (22 + txtChave.length);
-    payload += "0014BR.GOV.BCB.PIX01" + txtChave;
-    payload += "520400005303986";
-    payload += "54" + txtValor;
+    payload += f('26', infoConta);
+    payload += "52040000";
+    payload += "5303986";
+    payload += f('54', v);
     payload += "5802BR";
-    payload += "59" + NOME_RECEBEDOR.length.toString().padStart(2, '0') + NOME_RECEBEDOR;
-    payload += "60" + CIDADE_RECEBEDOR.length.toString().padStart(2, '0') + CIDADE_RECEBEDOR;
-    payload += "62070503***6304";
+    payload += f('59', NOME_RECEBEDOR);
+    payload += f('60', CIDADE_RECEBEDOR);
+    payload += f('62', f('05', idTransacao));
+    payload += "6304";
+
+    const pixCompleto = payload + calcularCRC16(payload);
     
-    const finalPayload = payload + crc16(payload);
-    
-    document.getElementById('modal-titulo').innerText = titulo;
-    document.getElementById('pix-code').value = finalPayload;
-    document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(finalPayload)}`;
+    document.getElementById('modal-titulo').innerText = "Plano " + valor;
+    document.getElementById('pix-code').value = pixCompleto;
+    document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(pixCompleto)}`;
     
     document.querySelector('.overlay').style.display = 'block';
     document.getElementById('qr-modal').style.display = 'block';
@@ -156,11 +159,10 @@ function closeQR() {
 }
 
 function copyPix() {
-    const copyText = document.getElementById("pix-code");
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(copyText.value);
-    alert("✅ Código copiado! Agora abra o app do seu banco e use a opção 'PIX Copia e Cola'.");
+    const el = document.getElementById("pix-code");
+    el.select();
+    navigator.clipboard.writeText(el.value);
+    alert("Código copiado! Use o PIX COPIA E COLA no seu banco.");
 }
 
 // --- FIREBASE ---
