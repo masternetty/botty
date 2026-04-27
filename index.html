@@ -24,13 +24,18 @@
     .btn-pix { background: var(--primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; margin-bottom: 8px; }
     .btn-paid { background: transparent; color: var(--secondary); border: 1px solid var(--secondary); padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.9rem; text-decoration: none; display: inline-block; box-sizing: border-box; }
 
-    /* SEÇÃO FORMAS DE PAGAMENTO - AGORA VISÍVEL E GRANDE */
+    /* SEÇÃO FORMAS DE PAGAMENTO - APENAS PIX, VISA E MASTER */
     .payments { background: #0a0a0a; padding: 3rem 1rem; border-radius: 15px; text-align: center; margin: 2rem auto; border: 1px solid #333; }
-    .payment-icons { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; align-items: center; }
-    .pay-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-    .pay-item img { width: 70px; height: auto; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2)); transition: 0.3s; }
-    .pay-item span { font-size: 0.9rem; font-weight: bold; color: #fff; letter-spacing: 1px; }
-    .pay-item:hover img { transform: scale(1.1); filter: none; }
+    .payment-icons { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; align-items: center; }
+    .pay-item { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+    
+    /* Tamanhos grandes para as suas imagens */
+    .pay-item img.img-pix { width: 100px; height: auto; }
+    .pay-item img.img-card { width: 180px; height: auto; }
+    
+    .pay-item img { filter: drop-shadow(0 0 8px rgba(255,255,255,0.1)); transition: 0.3s; }
+    .pay-item span { font-size: 1rem; font-weight: bold; color: #fff; letter-spacing: 1px; }
+    .pay-item:hover img { transform: scale(1.1); }
 
     /* Modal PIX */
     .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; backdrop-filter: blur(5px); }
@@ -88,24 +93,12 @@
   <div class="payments">
     <div class="payment-icons">
       <div class="pay-item">
-        <img src="https://logopsa.com/wp-content/uploads/2021/11/logo-pix-png-icone-520x520.png" alt="Pix">
+        <img src="pix.png" alt="Pix" class="img-pix">
         <span>PIX</span>
       </div>
       <div class="pay-item">
-        <img src="https://cdn-icons-png.flaticon.com/512/349/349221.png" alt="Visa">
-        <span>VISA</span>
-      </div>
-      <div class="pay-item">
-        <img src="https://cdn-icons-png.flaticon.com/512/349/349228.png" alt="Mastercard">
-        <span>MASTER</span>
-      </div>
-      <div class="pay-item">
-        <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" alt="PayPal">
-        <span>PAYPAL</span>
-      </div>
-      <div class="pay-item">
-        <img src="https://www.mercadopago.com.br/instore/assets/images/logo-mp.png" alt="MP">
-        <span>MERCADO PAGO</span>
+        <img src="card.png" alt="Visa e Master" class="img-card">
+        <span>VISA / MASTER</span>
       </div>
     </div>
   </div>
@@ -163,7 +156,10 @@ const db = firebase.database();
 
 function loginGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).catch(e => alert("Erro: " + e.message));
+  auth.signInWithPopup(provider).catch(e => {
+      console.error(e);
+      alert("Erro ao logar. Verifique se o domínio está autorizado no Firebase.");
+  });
 }
 
 function logout() { auth.signOut(); }
