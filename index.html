@@ -11,64 +11,80 @@
     body { 
       margin: 0; 
       font-family: 'Segoe UI', sans-serif; 
-      /* ADIÇÃO DO FUNDO PERSONALIZADO */
       background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('fundo.jpg'); 
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      background-color: var(--bg); /* Fallback */
+      background-color: var(--bg);
       color: #fff; 
-      overflow-x: hidden; 
+      overflow: hidden; /* Trava o scroll até ligar a TV */
+    }
+
+    /* --- MOLDURA DA TV --- */
+    .tv-frame {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      border: 18px solid #222;
+      border-image: linear-gradient(to bottom, #444, #111, #333) 1;
+      box-shadow: inset 0 0 50px #000;
+      z-index: 50000; pointer-events: none;
+      box-sizing: border-box;
+    }
+
+    /* --- TELA PRETA INICIAL (TV DESLIGADA) --- */
+    #tv-screen {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: #000; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; z-index: 20000;
+      transition: opacity 0.8s ease;
+    }
+
+    .power-btn {
+      width: 100px; height: 100px; border-radius: 50%; background: transparent;
+      border: 4px solid #333; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; transition: 0.3s;
+    }
+    .power-btn:hover { border-color: var(--primary); box-shadow: 0 0 30px var(--primary); }
+    .power-btn svg { width: 50px; fill: #333; transition: 0.3s; }
+    .power-btn:hover svg { fill: var(--primary); }
+    .tv-text { margin-top: 20px; color: #444; letter-spacing: 2px; font-weight: bold; text-transform: uppercase; }
+
+    /* --- CONTEÚDO PRINCIPAL --- */
+    #main-content {
+      opacity: 0; 
+      transition: opacity 1.5s ease;
+      padding-bottom: 50px;
     }
     
-    header { text-align: center; padding: 3rem 1rem; background: linear-gradient(to bottom, rgba(51, 0, 0, 0.8), rgba(0, 0, 0, 0.9)); }
+    header { text-align: center; padding: 3rem 1rem; background: linear-gradient(to bottom, rgba(51, 0, 0, 0.8), rgba(0, 0, 0, 0.5)); }
     section { padding: 2rem 1rem; max-width: 1100px; margin: 0 auto; }
-    
     h1 { color: var(--primary); text-transform: uppercase; letter-spacing: 3px; margin: 0; }
     h2 { text-align: center; color: #fff; margin-bottom: 2rem; text-transform: uppercase; font-size: 1.4rem; letter-spacing: 2px; }
 
-    /* Notificação no Topo (Toast) */
+    /* Notificação */
     #toast {
-      position: fixed;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--secondary);
-      color: #000;
-      padding: 15px 25px;
-      border-radius: 50px;
-      font-weight: bold;
-      z-index: 10001;
-      transition: top 0.5s ease;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-      text-align: center;
-      min-width: 300px;
+      position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+      background: var(--secondary); color: #000; padding: 15px 25px;
+      border-radius: 50px; font-weight: bold; z-index: 60000; transition: top 0.5s ease;
     }
-    #toast.show { top: 20px; }
+    #toast.show { top: 30px; }
 
     /* Planos */
     .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-    .product { background: rgba(17, 17, 17, 0.9); border: 2px solid var(--primary); padding: 20px; width: 280px; border-radius: 15px; text-align: center; transition: 0.3s; position: relative; backdrop-filter: blur(5px); }
-    .product:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(230, 0, 0, 0.3); }
+    .product { background: rgba(17, 17, 17, 0.9); border: 2px solid var(--primary); padding: 20px; width: 280px; border-radius: 15px; text-align: center; transition: 0.3s; backdrop-filter: blur(5px); }
     .price { font-size: 2.2rem; font-weight: 900; color: var(--primary); margin: 15px 0; }
     
-    .btn-pix { background: var(--primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; margin-bottom: 8px; text-decoration: none; display: block; box-sizing: border-box; }
-    .btn-paid { background: transparent; color: var(--secondary); border: 1px solid var(--secondary); padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.9rem; text-decoration: none; display: inline-block; box-sizing: border-box; }
+    .btn-pix { background: var(--primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; text-decoration: none; display: block; box-sizing: border-box; margin-bottom: 8px; }
+    .btn-paid { background: transparent; color: var(--secondary); border: 1px solid var(--secondary); padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; text-decoration: none; display: inline-block; box-sizing: border-box; }
     
-    .device-input { width: 100%; padding: 10px; margin-top: 10px; border-radius: 8px; border: 1px solid #444; background: #000; color: #fff; box-sizing: border-box; text-align: center; }
+    .device-input { width: 100%; padding: 10px; margin-top: 10px; border-radius: 8px; border: 1px solid #444; background: #000; color: #fff; text-align: center; }
 
     /* Pagamentos */
-    .payments { background: rgba(10, 10, 10, 0.85); padding: 3rem 1rem; border-radius: 15px; text-align: center; margin: 4rem auto; border: 1px solid #333; backdrop-filter: blur(5px); }
+    .payments { background: rgba(10, 10, 10, 0.8); padding: 3rem 1rem; border-radius: 15px; text-align: center; margin: 4rem auto; border: 1px solid #333; backdrop-filter: blur(5px); }
     .payment-icons { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; align-items: center; }
-    .pay-item { display: flex; flex-direction: column; align-items: center; gap: 15px; }
-    .img-pix { width: 90px; height: auto; }
-    .img-card { width: 160px; height: auto; }
 
     /* Comentários */
-    .comment-box { background: rgba(10, 10, 10, 0.85); padding: 2rem; border-radius: 15px; border-top: 2px solid var(--primary); margin-top: 3rem; backdrop-filter: blur(5px); }
-    #feedback-list { margin-bottom: 20px; max-height: 400px; overflow-y: auto; }
-    .comment-item { background: #1a1a1a; padding: 15px; border-radius: 10px; margin-bottom: 10px; position: relative; border-left: 4px solid var(--primary); text-align: left; }
-    .comment-user { font-weight: bold; color: var(--primary); font-size: 0.9rem; margin-bottom: 5px; }
+    .comment-box { background: rgba(10, 10, 10, 0.8); padding: 2rem; border-radius: 15px; border-top: 2px solid var(--primary); margin-top: 3rem; backdrop-filter: blur(5px); }
+    .comment-item { background: #1a1a1a; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid var(--primary); text-align: left; position: relative;}
     .btn-delete { position: absolute; top: 10px; right: 10px; background: #500; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 10px; display: none; }
 
     /* Modal PIX */
@@ -77,88 +93,74 @@
     #qr-img { width: 220px; height: 220px; background: #fff; padding: 10px; border-radius: 10px; margin: 15px auto; display: block; }
     #pix-code { width: 100%; height: 60px; background: #000; color: #0f0; border: 1px solid #333; padding: 10px; font-size: 0.7rem; font-family: monospace; resize: none; border-radius: 8px; }
 
-    /* Botões Flutuantes */
-    .float-wrap { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 999; }
-    .float-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-    .wa { background: #25d366; }
-    .tg { background: #0088cc; }
+    /* Flutuante */
+    .float-wrap { position: fixed; bottom: 20px; right: 20px; z-index: 999; }
+    .float-btn { width: 55px; height: 55px; border-radius: 50%; background: #25d366; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
   </style>
 </head>
 <body>
 
+<div class="tv-frame"></div>
 <div id="toast">Copiado! Abra o banco que deseja pagar.</div>
 
-<header>
-  <h1>MASTER NET IPTV 🚀</h1>
-</header>
+<div id="tv-screen">
+  <button class="power-btn" onclick="ligarTV()">
+    <svg viewBox="0 0 24 24"><path d="M16.56,5.44L15.11,6.89C16.84,7.94 18,9.83 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12C6,9.83 7.16,7.94 8.88,6.88L7.44,5.44C5.36,6.88 4,9.28 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12C20,9.28 18.64,6.88 16.56,5.44M13,3H11V13H13V3Z" /></svg>
+  </button>
+  <div class="tv-text">CLIQUE PARA LIGAR</div>
+</div>
 
-<section>
-  <h2>💎 Escolha seu Plano</h2>
-  <div class="products">
-    
-    <div class="product">
-      <b>35 RS 1 MÊS</b>
-      <div class="price">R$ 35,00</div>
-      <button class="btn-pix" onclick="gerarPix('35.00')">PAGAR PIX</button>
-      <a href="https://wa.me/5519996804873?text=Olá! Paguei o plano de 1 MÊS (35 RS). Segue o comprovante:" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
-    </div>
+<div id="main-content">
+  <header>
+    <h1>MASTER NET IPTV 🚀</h1>
+  </header>
 
-    <div class="product">
-      <b>60 RS 2 MÊS</b>
-      <div class="price">R$ 60,00</div>
-      <button class="btn-pix" onclick="gerarPix('60.00')">PAGAR PIX</button>
-      <a href="https://wa.me/5519996804873?text=Olá! Paguei o plano de 2 MÊS (60 RS). Segue o comprovante:" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
-    </div>
-
-    <div class="product">
-      <b>100 RS 4 MÊS</b>
-      <div class="price">R$ 100,00</div>
-      <button class="btn-pix" onclick="gerarPix('100.00')">PAGAR PIX</button>
-      <a href="https://wa.me/5519996804873?text=Olá! Paguei o plano de 4 MÊS (100 RS). Segue o comprovante:" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
-    </div>
-
-    <div class="product" style="border-color: var(--secondary);">
-      <b style="color: var(--secondary);">TESTE GRÁTIS</b>
-      <div class="price" style="color: var(--secondary);">R$ 0,00</div>
-      <input type="text" id="device-name" class="device-input" placeholder="Modelo do Dispositivo">
-      <button class="btn-pix" style="background: var(--secondary); margin-top: 10px;" onclick="enviarTeste()">ENVIAR DISPOSITIVO 🚀</button>
-      <small style="display:block; margin-top:5px; font-size:10px; color:#888;">Insira o dispositivo que você deseja usar o app</small>
-    </div>
-
-  </div>
-</section>
-
-<section>
-  <div class="payments">
-    <h2>💳 Formas de Pagamento</h2>
-    <div class="payment-icons">
-      <div class="pay-item">
-        <img src="pix.png" alt="Pix" class="img-pix">
-        <span>PIX</span>
+  <section>
+    <h2>💎 Escolha seu Plano</h2>
+    <div class="products">
+      <div class="product">
+        <b>35 RS 1 MÊS</b>
+        <div class="price">R$ 35,00</div>
+        <button class="btn-pix" onclick="gerarPix('35.00')">PAGAR PIX</button>
+        <a href="https://wa.me/5519996804873?text=Paguei 1 mês" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
       </div>
-      <div class="pay-item">
-        <img src="card.png" alt="Visa Master" class="img-card">
-        <span>VISA / MASTER</span>
+      <div class="product">
+        <b>60 RS 2 MÊS</b>
+        <div class="price">R$ 60,00</div>
+        <button class="btn-pix" onclick="gerarPix('60.00')">PAGAR PIX</button>
+        <a href="https://wa.me/5519996804873?text=Paguei 2 meses" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
+      </div>
+      <div class="product">
+        <b>100 RS 4 MÊS</b>
+        <div class="price">R$ 100,00</div>
+        <button class="btn-pix" onclick="gerarPix('100.00')">PAGAR PIX</button>
+        <a href="https://wa.me/5519996804873?text=Paguei 4 meses" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
+      </div>
+      <div class="product" style="border-color: var(--secondary);">
+        <b style="color: var(--secondary);">TESTE GRÁTIS</b>
+        <div class="price" style="color: var(--secondary);">R$ 0,00</div>
+        <input type="text" id="device-name" class="device-input" placeholder="Modelo do Dispositivo">
+        <button class="btn-pix" style="background: var(--secondary); margin-top: 10px;" onclick="enviarTeste()">ENVIAR DISPOSITIVO 🚀</button>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="comment-box">
-    <h2>💬 Depoimentos dos Clientes</h2>
-    <div id="feedback-list"></div>
-    <div id="auth-section" style="text-align:center;">
-      <button class="btn-pix" style="width:auto; padding:12px 30px;" onclick="loginGoogle()">🔐 Login com Google para comentar</button>
+  <section>
+    <div class="comment-box">
+      <h2>💬 Depoimentos dos Clientes</h2>
+      <div id="feedback-list"></div>
+      <div id="auth-section" style="text-align:center;">
+        <button class="btn-pix" style="width:auto; padding:12px 30px;" onclick="loginGoogle()">🔐 Login com Google para comentar</button>
+      </div>
+      <div id="comment-area" style="display:none; text-align: center;">
+        <p>Logado como: <strong id="user-display-name"></strong></p>
+        <textarea id="comment-input" style="width:100%; height:80px; background:#1a1a1a; color:#fff; border:1px solid #333; padding:10px; border-radius:8px;" placeholder="O que achou?"></textarea>
+        <button class="btn-pix" onclick="sendComment()" style="margin-top: 10px;">PUBLICAR</button>
+        <button onclick="logout()" style="background:none; border:none; color:#888; cursor:pointer; font-size: 11px;">Sair</button>
+      </div>
     </div>
-    <div id="comment-area" style="display:none; text-align: center;">
-      <p>Logado como: <strong id="user-display-name"></strong></p>
-      <textarea id="comment-input" style="width:100%; height:80px; background:#1a1a1a; color:#fff; border:1px solid #333; padding:10px; border-radius:8px;" placeholder="O que você achou do nosso IPTV?"></textarea>
-      <button class="btn-pix" onclick="sendComment()" style="margin-top: 10px;">PUBLICAR</button>
-      <button onclick="logout()" style="background:none; border:none; color:#888; cursor:pointer; font-size: 11px;">Sair da conta</button>
-    </div>
-  </div>
-</section>
+  </section>
+</div>
 
 <div class="overlay" onclick="closeQR()"></div>
 <div id="qr-modal">
@@ -170,7 +172,7 @@
 </div>
 
 <div class="float-wrap">
-  <a href="https://wa.me/5519996804873" class="float-btn wa" target="_blank">
+  <a href="https://wa.me/5519996804873" class="float-btn" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30">
   </a>
 </div>
@@ -180,14 +182,12 @@
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
 
 <script>
-// CONFIGURAÇÃO FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyDkzu7El2JNbQA7kflKjNX8DdsAibG7uGU",
   authDomain: "site-467da.firebaseapp.com",
   databaseURL: "https://site-467da-default-rtdb.firebaseio.com",
   projectId: "site-467da",
   storageBucket: "site-467da.firebasestorage.app",
-  messagingSenderId: "749496526421",
   appId: "1:749496526421:web:53d7d52bfcdc04b0be96dc"
 };
 
@@ -196,11 +196,16 @@ const auth = firebase.auth();
 const db = firebase.database();
 const admins = ["hugoalevi731@gmail.com", "milezivictor@gmail.com"];
 
-// LOGIN / LOGOUT
-function loginGoogle() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).catch(e => alert("Erro: Domínio não autorizado no painel do Firebase."));
+function ligarTV() {
+  document.getElementById('tv-screen').style.opacity = '0';
+  setTimeout(() => {
+    document.getElementById('tv-screen').style.display = 'none';
+    document.getElementById('main-content').style.opacity = '1';
+    document.body.style.overflow = 'auto';
+  }, 800);
 }
+
+function loginGoogle() { auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()); }
 function logout() { auth.signOut(); }
 
 auth.onAuthStateChanged(user => {
@@ -210,7 +215,6 @@ auth.onAuthStateChanged(user => {
   renderComments();
 });
 
-// COMENTÁRIOS
 function sendComment() {
   const text = document.getElementById('comment-input').value;
   if(text.trim() && auth.currentUser) {
@@ -219,39 +223,22 @@ function sendComment() {
   }
 }
 
-function deleteComment(id) {
-  if(confirm("Deseja apagar este depoimento?")) db.ref('comments/' + id).remove();
-}
-
 function renderComments() {
   db.ref('comments').on('value', snap => {
     const list = document.getElementById('feedback-list');
     list.innerHTML = "";
     snap.forEach(child => {
       const c = child.val();
-      const id = child.key;
       const isAdm = (auth.currentUser && admins.includes(auth.currentUser.email));
       const div = document.createElement('div');
       div.className = 'comment-item';
-      div.innerHTML = `
-        <div class="comment-user">${c.name}</div>
-        <div>${c.text}</div>
-        <button class="btn-delete" style="display: ${isAdm ? 'block' : 'none'}" onclick="deleteComment('${id}')">Apagar</button>
-      `;
+      div.innerHTML = `<strong>${c.name}</strong><div>${c.text}</div>
+      <button class="btn-delete" style="display: ${isAdm ? 'block' : 'none'}" onclick="db.ref('comments/${child.key}').remove()">Apagar</button>`;
       list.prepend(div);
     });
   });
 }
 
-// TESTE GRÁTIS
-function enviarTeste() {
-    const dispositivo = document.getElementById('device-name').value;
-    if (!dispositivo.trim()) { alert("Digite o seu dispositivo!"); return; }
-    const msg = encodeURIComponent(`Olá! Quero meu teste grátis.\nMeu dispositivo: ${dispositivo}`);
-    window.open(`https://wa.me/5519996804873?text=${msg}`, '_blank');
-}
-
-// PIX
 function gerarPix(v) {
     const p = "00020126360014BR.GOV.BCB.PIX011315a458f7-cb18-4179-a454-33eeadca9dca520400005303986540"+v.length+v+"5802BR5910MASTER NET6009SAO PAULO62070503***6304";
     document.getElementById('pix-code').value = p;
@@ -261,17 +248,21 @@ function gerarPix(v) {
 }
 
 function copyPix() {
-  const code = document.getElementById("pix-code");
-  code.select();
+  document.getElementById("pix-code").select();
   document.execCommand("copy");
-  const toast = document.getElementById("toast");
-  toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 4000);
+  document.getElementById("toast").classList.add("show");
+  setTimeout(() => document.getElementById("toast").classList.remove("show"), 3000);
 }
 
 function closeQR() { 
   document.querySelector('.overlay').style.display = 'none'; 
   document.getElementById('qr-modal').style.display = 'none'; 
+}
+
+function enviarTeste() {
+    const d = document.getElementById('device-name').value;
+    if (!d.trim()) return alert("Digite o dispositivo!");
+    window.open(`https://wa.me/5519996804873?text=Teste para: ${d}`, '_blank');
 }
 </script>
 </body>
