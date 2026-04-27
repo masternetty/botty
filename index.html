@@ -12,21 +12,21 @@
     h1, h2 { color: #e60000; }
     .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
     .product { background: rgba(0,0,0,0.8); border: 1px solid #e60000; padding: 1rem; width: 280px; border-radius: 8px; text-align: center; }
-    .product a { display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem; background-color: #e60000; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; }
+    .product a, .product button { display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem; background-color: #e60000; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; border: none; cursor: pointer; width: 80%; }
+    
+    /* Estilo do Modal do QR Code */
+    #qr-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; border: 2px solid #e60000; padding: 20px; border-radius: 15px; z-index: 10000; text-align: center; width: 90%; max-width: 350px; }
+    #qr-modal img { width: 200px; height: 200px; background: #fff; padding: 10px; border-radius: 10px; }
+    #qr-modal textarea { width: 100%; height: 60px; margin-top: 10px; background: #222; color: #fff; border: 1px solid #444; padding: 5px; font-size: 10px; resize: none; }
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; }
+    
     .pix-section { background: rgba(0,0,0,0.8); padding: 1rem; border: 1px solid #e60000; text-align: center; border-radius: 8px; }
     .pix-section img { height: 60px; margin: 0 10px; vertical-align: middle; }
     .popup-btn { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 9999; }
     .popup-btn a, #open-chatbot { background-color: #e60000; color: white; text-decoration: none; padding: 0.75rem 1rem; border-radius: 50px; font-weight: bold; text-align: center; box-shadow: 0 0 10px #e60000; cursor: pointer; }
     .feedbacks { background-color: rgba(0,0,0,0.8); padding: 2rem 1rem; border-top: 1px solid #e60000; border-bottom: 1px solid #e60000; }
     .feedback { background: #222; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
-    .feedback strong { color: #e60000; }
     #chatbot { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; border: 2px solid #e60000; border-radius: 10px; width: 320px; max-height: 500px; padding: 1rem; z-index: 99999; }
-    #chat-content { max-height: 250px; overflow-y: auto; }
-    #chat-input { width: 100%; margin-top: 10px; display: flex; }
-    #chat-input input { flex: 1; padding: 0.5rem; border: none; border-radius: 5px 0 0 5px; }
-    #chat-input button { padding: 0.5rem; background: #e60000; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer; }
-    #suggestions { margin-bottom: 10px; }
-    #suggestions button { margin: 2px; padding: 0.5rem; background: #e60000; color: white; border: none; border-radius: 5px; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -34,86 +34,71 @@
 <header>
   <img src="logo.png" alt="MASTER NET Logo" style="height: 120px; margin-bottom: 1rem;">
   <h1>Bem-vindo à MASTER NET</h1>
-  <p>IPTV com qualidade máxima, atendimento rápido e planos acessíveis. Faça seu teste ou ative agora!</p>
+  <p>IPTV com qualidade máxima. Escolha seu plano e pague via PIX com QR Code agora mesmo!</p>
 </header>
 
 <section>
   <h2>Planos & Produtos</h2>
   <div class="products">
     <div class="product">
-      <p>Teste de Pagamento 💳</p>
+      <p>Teste de Pagamento</p>
       <p style="font-size: 1.2rem; font-weight: bold;">R$ 0,10</p>
-      <a href="https://mpago.la/22V7wWL" target="_blank" style="background-color: #007bff;">Testar Agora</a>
-    </div>
-
-    <div class="product">
-      <p>Teste Grátis 🎁</p>
-      <p style="font-size: 1.2rem; font-weight: bold;">R$ 0,00</p>
-      <a href="https://wa.me/5519996804873?text=Quero%20teste%20grátis" style="background-color: #00b300;">Solicitar no Zap</a>
+      <a href="https://mpago.la/22V7wWL" target="_blank" style="background-color: #007bff;">Pagar via Link</a>
     </div>
 
     <div class="product">
       <p>Plano 1 Mês</p>
       <p style="font-size: 1.2rem; font-weight: bold;">R$ 35,00</p>
-      <a href="https://mpago.la/2Y94v1R" target="_blank">Comprar Agora</a>
+      <a href="https://mpago.la/2Y94v1R" target="_blank">Pagar via Link</a>
     </div>
 
     <div class="product">
       <p>Plano 2 Meses</p>
       <p style="font-size: 1.2rem; font-weight: bold;">R$ 60,00</p>
-      <a href="https://mpago.la/2ZHZtoj" target="_blank">Comprar Agora</a>
+      <a href="https://mpago.la/2ZHZtoj" target="_blank">Pagar via Link</a>
     </div>
 
     <div class="product">
       <p>Plano 4 Meses</p>
       <p style="font-size: 1.2rem; font-weight: bold;">R$ 100,00</p>
-      <a href="https://mpago.la/28h8M7b" target="_blank">Comprar Agora</a>
+      <a href="https://mpago.la/28h8M7b" target="_blank">Pagar via Link</a>
     </div>
   </div>
 </section>
 
+<div class="overlay" onclick="closeQR()"></div>
+<div id="qr-modal">
+  <h3 style="color:#e60000; margin-top:0;">Pague com PIX</h3>
+  <img id="qr-img" src="" alt="QR Code PIX">
+  <p style="font-size:12px; margin: 10px 0 5px;">Copia e Cola:</p>
+  <textarea id="pix-code" readonly onclick="this.select()"></textarea>
+  <button onclick="copyPix()" style="background:#00b300; color:white; border:none; padding:8px; width:100%; border-radius:5px; margin-top:10px; cursor:pointer; font-weight:bold;">Copiar Código</button>
+  <button onclick="closeQR()" style="background:#444; color:white; border:none; padding:8px; width:100%; border-radius:5px; margin-top:5px; cursor:pointer;">Fechar</button>
+</div>
+
 <section>
-  <h2>Formas de Pagamento</h2>
   <div class="pix-section">
-    <p>Aceitamos <strong>PIX</strong> e <strong>Cartão</strong>. Pagamento seguro via Mercado Pago.</p>
-    <div><img src="pix.png" alt="PIX"><img src="card.png" alt="Cartão"></div>
-    <p style="font-size: 0.9rem; margin-top: 10px;">*Após o pagamento, envie o comprovante no nosso WhatsApp.</p>
+    <p>Deseja gerar o <strong>QR Code agora</strong> no site? Informe ao suporte no WhatsApp o plano escolhido!</p>
+    <button onclick="openManualPIX()" style="background:#00b300; color:white; padding:10px 20px; border-radius:5px; font-weight:bold; border:none; cursor:pointer;">Gerar QR Code Rápido</button>
   </div>
 </section>
 
 <section class="feedbacks">
   <h2>💬 Comentários</h2>
-  <div id="login-section">
-    <button id="login-btn" style="background: #e60000; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">🔐 Fazer Login com Google para comentar</button>
-  </div>
-
+  <div id="login-section"><button id="login-btn" style="background:#e60000; color:white; border:none; padding:10px; border-radius:5px; cursor:pointer;">🔐 Login com Google</button></div>
   <div id="comment-section" style="display:none;">
     <div id="feedback-list"></div>
     <form id="comment-form">
-      <input type="text" id="name" placeholder="Seu nome" readonly required style="width: 100%; margin-bottom: 5px; padding: 8px; box-sizing: border-box;">
-      <textarea id="message" placeholder="Seu comentário" required style="width: 100%; height: 60px; margin-bottom: 5px; padding: 8px; box-sizing: border-box;"></textarea>
-      <button type="submit" style="background: #e60000; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px; width: 100%;">Enviar Comentário</button>
+      <input type="text" id="name" placeholder="Seu nome" readonly style="width:100%; margin-bottom:5px; padding:8px;">
+      <textarea id="message" placeholder="Seu comentário" required style="width:100%; height:60px; margin-bottom:5px; padding:8px;"></textarea>
+      <button type="submit" style="background:#e60000; color:white; border:none; padding:10px; cursor:pointer; border-radius:5px; width:100%;">Enviar</button>
     </form>
   </div>
 </section>
 
 <div class="popup-btn">
   <div id="open-chatbot">🤖 Ajuda</div>
-  <a href="https://wa.me/5519996804873" target="_blank">💬 WhatsApp</a>
-</div>
-
-<div id="chatbot">
-  <h3>🤖 Bot MasterNet</h3>
-  <div id="suggestions">
-    <button onclick="quickReply('Onde posso assistir?')">📺 Onde assistir?</button>
-    <button onclick="quickReply('Quero teste grátis')">🎁 Teste grátis</button>
-    <button onclick="quickReply('Formas de pagamento')">💳 Pagamento</button>
-  </div>
-  <div id="chat-content"></div>
-  <div id="chat-input">
-    <input type="text" id="user-message" placeholder="Digite sua pergunta...">
-    <button onclick="sendMessage()">Enviar</button>
-  </div>
+  <a href="https://wa.me/5519996804873" target="_blank" style="background:#25d366;">💬 WhatsApp</a>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
@@ -121,6 +106,36 @@
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
 
 <script>
+// --- CONFIGURAÇÃO PIX ---
+const CHAVE_PIX = "5519996804873"; // Coloque aqui sua chave (CPF, Celular ou Email)
+const NOME_RECEBEDOR = "MASTER NET";
+const CIDADE_RECEBEDOR = "SAO PAULO";
+
+// Função para abrir o QR Code Manual (Simplificado para demonstração)
+function openManualPIX() {
+    // Para QR Code dinâmico real com valor, o ideal é usar o link do Mercado Pago acima.
+    // Esta função simula a exibição de um QR Code fixo de sua chave.
+    const pixEstatico = `00020126360014BR.GOV.BCB.PIX0113${CHAVE_PIX}5204000053039865802BR5910${NOME_RECEBEDOR}6009${CIDADE_RECEBEDOR}62070503***6304`;
+    
+    document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pixEstatico)}`;
+    document.getElementById('pix-code').value = pixEstatico;
+    document.querySelector('.overlay').style.display = 'block';
+    document.getElementById('qr-modal').style.display = 'block';
+}
+
+function closeQR() {
+    document.querySelector('.overlay').style.display = 'none';
+    document.getElementById('qr-modal').style.display = 'none';
+}
+
+function copyPix() {
+    const copyText = document.getElementById("pix-code");
+    copyText.select();
+    document.execCommand("copy");
+    alert("Código PIX copiado com sucesso!");
+}
+
+// --- FIREBASE ---
 const firebaseConfig = {
   apiKey: "AIzaSyDkzu7El2JNbQA7kflKjNX8DdsAibG7uGU",
   authDomain: "site-467da.firebaseapp.com",
@@ -162,33 +177,6 @@ database.ref("feedbacks").on("child_added", snapshot => {
   div.innerHTML = `<strong>${feedback.name}:</strong> ${feedback.message}`;
   document.getElementById("feedback-list").prepend(div);
 });
-
-document.getElementById('open-chatbot').onclick = () => {
-  const chatbot = document.getElementById('chatbot');
-  chatbot.style.display = chatbot.style.display === 'block' ? 'none' : 'block';
-};
-
-function quickReply(msg) {
-  document.getElementById('user-message').value = msg;
-  sendMessage();
-}
-
-function sendMessage() {
-  const userMessage = document.getElementById("user-message").value.toLowerCase();
-  const chatContent = document.getElementById("chat-content");
-  if(!userMessage) return;
-
-  chatContent.innerHTML += `<p><strong>Você:</strong> ${userMessage}</p>`;
-  let reply = "Vou te levar ao WhatsApp para conversarmos.";
-
-  if (userMessage.includes("onde")) reply = "Smart TV, Celular, TV Box e PC!";
-  if (userMessage.includes("teste")) reply = "Peça seu teste no Zap ou use a aba de teste de 10 centavos!";
-  if (userMessage.includes("pagar") || userMessage.includes("pix")) reply = "Aceitamos PIX e Cartão! Clique em um dos planos para pagar.";
-
-  chatContent.innerHTML += `<p><strong>Bot:</strong> ${reply}</p>`;
-  document.getElementById("user-message").value = "";
-  chatContent.scrollTop = chatContent.scrollHeight;
-}
 </script>
 
 </body>
