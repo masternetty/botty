@@ -47,17 +47,17 @@
 
     <div class="product">
       <p>Plano 1 Mês - R$35,00</p>
-      <a href="https://link.mercadopago.com.br/masteri" target="_blank">Comprar Agora</a>
+      <a href="https://mpago.la/2Y94v1R" target="_blank">Comprar Agora</a>
     </div>
 
     <div class="product">
       <p>Plano 2 Meses - R$60,00</p>
-      <a href="https://link.mercadopago.com.br/masteri" target="_blank">Comprar Agora</a>
+      <a href="https://mpago.la/2ZHZtoj" target="_blank">Comprar Agora</a>
     </div>
 
     <div class="product">
       <p>Plano 4 Meses - R$100,00</p>
-      <a href="https://link.mercadopago.com.br/masteri" target="_blank">Comprar Agora</a>
+      <a href="https://mpago.la/28h8M7b" target="_blank">Comprar Agora</a>
     </div>
   </div>
 </section>
@@ -65,8 +65,9 @@
 <section>
   <h2>Formas de Pagamento</h2>
   <div class="pix-section">
-    <p>Aceitamos <strong>PIX</strong> e <strong>Cartão</strong> via Mercado Pago. Clique em comprar para ativar seu plano.</p>
+    <p>Aceitamos <strong>PIX</strong> e <strong>Cartão</strong>. Pagamento seguro via Mercado Pago.</p>
     <div><img src="pix.png" alt="PIX"><img src="card.png" alt="Cartão"></div>
+    <p style="font-size: 0.9rem; margin-top: 10px;">*Após o pagamento, envie o comprovante no nosso WhatsApp.</p>
   </div>
 </section>
 
@@ -79,9 +80,9 @@
   <div id="comment-section" style="display:none;">
     <div id="feedback-list"></div>
     <form id="comment-form">
-      <input type="text" id="name" placeholder="Seu nome" readonly required style="width: 100%; margin-bottom: 5px; padding: 5px;">
-      <textarea id="message" placeholder="Seu comentário" required style="width: 100%; height: 60px; margin-bottom: 5px; padding: 5px;"></textarea>
-      <button type="submit" style="background: #e60000; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px;">Enviar Comentário</button>
+      <input type="text" id="name" placeholder="Seu nome" readonly required style="width: 100%; margin-bottom: 5px; padding: 8px; box-sizing: border-box;">
+      <textarea id="message" placeholder="Seu comentário" required style="width: 100%; height: 60px; margin-bottom: 5px; padding: 8px; box-sizing: border-box;"></textarea>
+      <button type="submit" style="background: #e60000; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px; width: 100%;">Enviar Comentário</button>
     </form>
   </div>
 </section>
@@ -89,7 +90,6 @@
 <div class="popup-btn">
   <div id="open-chatbot">🤖 Ajuda</div>
   <a href="https://wa.me/5519996804873" target="_blank">💬 WhatsApp</a>
-  <a href="https://t.me/hteshtyh_bot" target="_blank">📢 Telegram</a>
 </div>
 
 <div id="chatbot">
@@ -98,8 +98,6 @@
     <button onclick="quickReply('Onde posso assistir?')">📺 Onde assistir?</button>
     <button onclick="quickReply('Quero teste grátis')">🎁 Teste grátis</button>
     <button onclick="quickReply('Formas de pagamento')">💳 Pagamento</button>
-    <button onclick="quickReply('Atualizações automáticas')">🔄 Atualizações</button>
-    <button onclick="quickReply('Promoções atuais')">🎯 Promoções</button>
   </div>
   <div id="chat-content"></div>
   <div id="chat-input">
@@ -120,14 +118,12 @@ const firebaseConfig = {
   projectId: "site-467da",
   storageBucket: "site-467da.appspot.com",
   messagingSenderId: "749496526421",
-  appId: "1:749496526421:web:53d7d52bfcdc04b0be96dc",
-  measurementId: "G-F932J7Z078"
+  appId: "1:749496526421:web:53d7d52bfcdc04b0be96dc"
 };
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const database = firebase.database();
 
-// Login Google
 document.getElementById('login-btn').onclick = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(provider);
@@ -141,13 +137,12 @@ auth.onAuthStateChanged(user => {
   }
 });
 
-// Comentários
 document.getElementById('comment-form').onsubmit = e => {
   e.preventDefault();
   const name = document.getElementById('name').value;
   const message = document.getElementById('message').value;
   database.ref("feedbacks").push({ name, message, timestamp: Date.now() });
-  document.getElementById('comment-form').reset();
+  document.getElementById('message').value = "";
 };
 
 database.ref("feedbacks").on("child_added", snapshot => {
@@ -158,7 +153,6 @@ database.ref("feedbacks").on("child_added", snapshot => {
   document.getElementById("feedback-list").prepend(div);
 });
 
-// Chatbot
 document.getElementById('open-chatbot').onclick = () => {
   const chatbot = document.getElementById('chatbot');
   chatbot.style.display = chatbot.style.display === 'block' ? 'none' : 'block';
@@ -172,23 +166,14 @@ function quickReply(msg) {
 function sendMessage() {
   const userMessage = document.getElementById("user-message").value.toLowerCase();
   const chatContent = document.getElementById("chat-content");
-  chatContent.innerHTML += `<p><strong>Você:</strong> ${userMessage}</p>`;
+  if(!userMessage) return;
 
-  let reply = "❌ Não entendi! Vou te levar ao WhatsApp.";
-  if (userMessage.includes("assistir") || userMessage.includes("onde")) {
-    reply = "📺 Funciona em celular, tablet, Smart TV, TV Box e PC!";
-  } else if (userMessage.includes("teste") || userMessage.includes("grátis")) {
-    reply = "🎁 Temos teste grátis! Vou te redirecionar.";
-    setTimeout(() => {
-      window.open('https://wa.me/5519996804873?text=Quero%20teste%20grátis', '_blank');
-    }, 2000);
-  } else if (userMessage.includes("pagar") || userMessage.includes("pix") || userMessage.includes("cartão") || userMessage.includes("comprar")) {
-    reply = "💳 Aceitamos PIX e Cartão via Mercado Pago. Clique nos botões dos planos acima para comprar!";
-  } else if (userMessage.includes("atualiza") || userMessage.includes("atualizações")) {
-    reply = "🔄 Temos atualizações automáticas incluídas!";
-  } else if (userMessage.includes("promoção") || userMessage.includes("promoções")) {
-    reply = "🎯 Consulte nossas promoções de combos no WhatsApp!";
-  }
+  chatContent.innerHTML += `<p><strong>Você:</strong> ${userMessage}</p>`;
+  let reply = "Vou te levar ao WhatsApp para conversarmos.";
+
+  if (userMessage.includes("onde")) reply = "📺 Smart TV, Celular, TV Box e PC!";
+  if (userMessage.includes("teste")) reply = "🎁 Peça seu teste no WhatsApp 19996804873!";
+  if (userMessage.includes("pagar") || userMessage.includes("pix")) reply = "💳 Aceitamos PIX e Cartão! Basta clicar em 'Comprar Agora' em um dos nossos planos.";
 
   chatContent.innerHTML += `<p><strong>Bot:</strong> ${reply}</p>`;
   document.getElementById("user-message").value = "";
@@ -197,5 +182,6 @@ function sendMessage() {
 </script>
 
 </body>
+</html>
 </html>
 ```
