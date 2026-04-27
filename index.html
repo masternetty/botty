@@ -13,7 +13,7 @@
     section { padding: 2rem 1rem; max-width: 1100px; margin: 0 auto; }
     
     h1 { color: var(--primary); text-transform: uppercase; letter-spacing: 3px; margin: 0; }
-    .subtitle { color: #888; margin-top: 10px; }
+    h2 { text-align: center; color: #fff; margin-bottom: 2rem; text-transform: uppercase; font-size: 1.2rem; letter-spacing: 2px; }
 
     /* Planos */
     .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
@@ -21,9 +21,17 @@
     .product:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(230, 0, 0, 0.3); }
     .price { font-size: 2.2rem; font-weight: 900; color: var(--primary); margin: 15px 0; }
     
-    .btn-pix { background: var(--primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; margin-bottom: 8px; }
+    .btn-pix { background: var(--primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; margin-bottom: 8px; transition: 0.3s; }
+    .btn-pix:hover { background: #ff0000; transform: scale(1.02); }
     .btn-paid { background: transparent; color: var(--secondary); border: 1px solid var(--secondary); padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.9rem; text-decoration: none; display: inline-block; box-sizing: border-box; }
     .btn-paid:hover { background: var(--secondary); color: #000; }
+
+    /* Formas de Pagamento */
+    .payments { background: #0a0a0a; padding: 2rem; border-radius: 15px; text-align: center; margin: 2rem auto; border: 1px solid #222; }
+    .payment-icons { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; align-items: center; opacity: 0.8; }
+    .pay-item { display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; color: #888; }
+    .pay-item img { width: 40px; margin-bottom: 5px; filter: grayscale(1); transition: 0.3s; }
+    .pay-item:hover img { filter: grayscale(0); }
 
     /* Modal PIX */
     .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; backdrop-filter: blur(5px); }
@@ -36,12 +44,12 @@
     #feedback-list { margin-bottom: 20px; max-height: 400px; overflow-y: auto; text-align: left; }
     .comment-item { background: #1a1a1a; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid var(--primary); }
     .comment-user { font-weight: bold; color: var(--primary); font-size: 0.9rem; }
-    
     .comment-form textarea { width: 100%; height: 80px; background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 10px; box-sizing: border-box; }
 
     /* Flutuantes */
     .float-wrap { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 999; }
-    .float-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+    .float-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: 0.3s; }
+    .float-btn:hover { transform: scale(1.1); }
     .wa { background: #25d366; }
     .tg { background: #0088cc; }
   </style>
@@ -50,10 +58,10 @@
 
 <header>
   <h1>MASTER NET IPTV 🚀</h1>
-  <p class="subtitle">Qualidade 4K sem travamentos. Chame no suporte para ativar!</p>
 </header>
 
 <section>
+  <h2>💎 Nossos Planos</h2>
   <div class="products">
     <div class="product">
       <b>⚡ TESTE RÁPIDO</b>
@@ -74,6 +82,19 @@
       <div class="price">R$ 100,00</div>
       <button class="btn-pix" onclick="gerarPix('100.00', '4_MESES')">PAGAR PIX</button>
       <a href="https://wa.me/5519996804873?text=Já paguei! Abaixo comprovante do Plano Master (R$ 100)." target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>💳 Formas de Pagamento</h2>
+  <div class="payments">
+    <div class="payment-icons">
+      <div class="pay-item"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_Pix.png" alt="Pix"><span>PIX</span></div>
+      <div class="pay-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa"><span>CRÉDITO</span></div>
+      <div class="pay-item"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard"><span>DÉBITO</span></div>
+      <div class="pay-item"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal"><span>PAYPAL</span></div>
+      <div class="pay-item"><img src="https://upload.wikimedia.org/wikipedia/commons/1/16/MercadoLibre_logo.svg" alt="Mercado Pago"><span>MERCADO PAGO</span></div>
     </div>
   </div>
 </section>
@@ -113,7 +134,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
 
 <script>
-// --- CONFIGURAÇÃO COM SEUS DADOS ---
 const firebaseConfig = {
   apiKey: "AIzaSyDkzu7El2JNbQA7kflKjNX8DdsAibG7uGU",
   authDomain: "site-467da.firebaseapp.com",
@@ -129,8 +149,15 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
 
-// Funções de Login
-function loginGoogle() { auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()); }
+// Correção do Login
+function loginGoogle() { 
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider).catch(error => {
+    console.error("Erro no login: ", error.code, error.message);
+    alert("Erro ao abrir login: " + error.message + "\nVerifique se os pop-ups estão permitidos.");
+  });
+}
+
 function logout() { auth.signOut(); }
 
 auth.onAuthStateChanged(user => {
@@ -155,7 +182,7 @@ db.ref('comments').limitToLast(20).on('child_added', snap => {
   document.getElementById('feedback-list').prepend(div);
 });
 
-// --- GERADOR DE PIX ---
+// PIX
 const CHAVE_PIX = "15a458f7-cb18-4179-a454-33eeadca9dca";
 
 function calcularCRC16(p) {
@@ -186,7 +213,12 @@ function gerarPix(v, id) {
 }
 
 function closeQR() { document.querySelector('.overlay').style.display = 'none'; document.getElementById('qr-modal').style.display = 'none'; }
-function copyPix() { navigator.clipboard.writeText(document.getElementById("pix-code").value); alert("Copiado! Agora pague no banco e clique em 'JÁ PAGUEI'."); }
+function copyPix() { 
+    const area = document.getElementById("pix-code");
+    area.select();
+    navigator.clipboard.writeText(area.value);
+    alert("Copiado! Agora pague no seu banco."); 
+}
 </script>
 </body>
 </html>
