@@ -34,29 +34,39 @@
 <header>
   <img src="logo.png" alt="MASTER NET Logo" style="height: 120px; margin-bottom: 1rem;">
   <h1>Bem-vindo à MASTER NET</h1>
-  <p>IPTV com qualidade máxima, atendimento rápido e planos acessíveis. Faça seu teste grátis 🎁 ou ative agora!</p>
+  <p>IPTV com qualidade máxima, atendimento rápido e planos acessíveis. Faça seu teste ou ative agora!</p>
 </header>
 
 <section>
   <h2>Planos & Produtos</h2>
   <div class="products">
     <div class="product">
-      <p>Teste Grátis 🎁</p>
-      <a href="https://wa.me/5519996804873?text=Quero%20teste%20grátis" style="background-color: #00b300;">Ativar Agora</a>
+      <p>Teste de Pagamento 💳</p>
+      <p style="font-size: 1.2rem; font-weight: bold;">R$ 0,10</p>
+      <a href="https://mpago.la/22V7wWL" target="_blank" style="background-color: #007bff;">Testar Agora</a>
     </div>
 
     <div class="product">
-      <p>Plano 1 Mês - R$35,00</p>
+      <p>Teste Grátis 🎁</p>
+      <p style="font-size: 1.2rem; font-weight: bold;">R$ 0,00</p>
+      <a href="https://wa.me/5519996804873?text=Quero%20teste%20grátis" style="background-color: #00b300;">Solicitar no Zap</a>
+    </div>
+
+    <div class="product">
+      <p>Plano 1 Mês</p>
+      <p style="font-size: 1.2rem; font-weight: bold;">R$ 35,00</p>
       <a href="https://mpago.la/2Y94v1R" target="_blank">Comprar Agora</a>
     </div>
 
     <div class="product">
-      <p>Plano 2 Meses - R$60,00</p>
+      <p>Plano 2 Meses</p>
+      <p style="font-size: 1.2rem; font-weight: bold;">R$ 60,00</p>
       <a href="https://mpago.la/2ZHZtoj" target="_blank">Comprar Agora</a>
     </div>
 
     <div class="product">
-      <p>Plano 4 Meses - R$100,00</p>
+      <p>Plano 4 Meses</p>
+      <p style="font-size: 1.2rem; font-weight: bold;">R$ 100,00</p>
       <a href="https://mpago.la/28h8M7b" target="_blank">Comprar Agora</a>
     </div>
   </div>
@@ -171,9 +181,9 @@ function sendMessage() {
   chatContent.innerHTML += `<p><strong>Você:</strong> ${userMessage}</p>`;
   let reply = "Vou te levar ao WhatsApp para conversarmos.";
 
-  if (userMessage.includes("onde")) reply = "📺 Smart TV, Celular, TV Box e PC!";
-  if (userMessage.includes("teste")) reply = "🎁 Peça seu teste no WhatsApp 19996804873!";
-  if (userMessage.includes("pagar") || userMessage.includes("pix")) reply = "💳 Aceitamos PIX e Cartão! Basta clicar em 'Comprar Agora' em um dos nossos planos.";
+  if (userMessage.includes("onde")) reply = "Smart TV, Celular, TV Box e PC!";
+  if (userMessage.includes("teste")) reply = "Peça seu teste no Zap ou use a aba de teste de 10 centavos!";
+  if (userMessage.includes("pagar") || userMessage.includes("pix")) reply = "Aceitamos PIX e Cartão! Clique em um dos planos para pagar.";
 
   chatContent.innerHTML += `<p><strong>Bot:</strong> ${reply}</p>`;
   document.getElementById("user-message").value = "";
@@ -183,5 +193,3 @@ function sendMessage() {
 
 </body>
 </html>
-</html>
-```
