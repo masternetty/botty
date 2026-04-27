@@ -10,7 +10,7 @@
     
     body { 
       margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #fff; 
-      overflow: hidden; /* Trava o scroll até ligar a TV */
+      overflow: hidden; 
     }
 
     /* --- MOLDURA DA TV REALISTA --- */
@@ -40,7 +40,7 @@
     .power-btn:hover svg { fill: var(--primary); }
     .tv-text { margin-top: 20px; color: #444; letter-spacing: 2px; font-weight: bold; text-transform: uppercase; }
 
-    /* ANIMAÇÃO DE LIGAR (EXPANDINDO VERTICAL E HORIZONTAL) */
+    /* ANIMAÇÃO DE LIGAR */
     .tv-on-flash {
       position: absolute; width: 100%; height: 4px; background: #fff;
       top: 50%; left: 0; transform: scaleX(0); z-index: 20001; display: none;
@@ -84,17 +84,11 @@
     
     .device-input { width: 100%; padding: 10px; margin-top: 10px; border-radius: 8px; border: 1px solid #444; background: #000; color: #fff; box-sizing: border-box; text-align: center; }
 
-    /* Modal PIX */
-    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; backdrop-filter: blur(5px); }
-    #qr-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; border: 2px solid var(--primary); padding: 25px; border-radius: 20px; z-index: 10000; text-align: center; width: 90%; max-width: 350px; }
-    #qr-img { width: 220px; height: 220px; background: #fff; padding: 10px; border-radius: 10px; margin: 15px auto; display: block; }
-    #pix-code { width: 100%; height: 60px; background: #000; color: #0f0; border: 1px solid #333; padding: 10px; font-size: 0.7rem; font-family: monospace; resize: none; border-radius: 8px; }
-
     /* Comentários */
     .comment-box { background: #0a0a0a; padding: 2rem; border-radius: 15px; border-top: 2px solid var(--primary); margin-top: 3rem; }
     .comment-item { background: #1a1a1a; padding: 15px; border-radius: 10px; margin-bottom: 10px; position: relative; border-left: 4px solid var(--primary); text-align: left; }
     .comment-user { font-weight: bold; color: var(--primary); font-size: 0.9rem; margin-bottom: 5px; }
-    .btn-delete { position: absolute; top: 10px; right: 10px; background: #500; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 10px; display: none; }
+    .btn-delete { position: absolute; top: 10px; right: 10px; background: #500; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 10px; display: block; }
   </style>
 </head>
 <body>
@@ -152,13 +146,16 @@
     <div class="comment-box">
       <h2>💬 Depoimentos dos Clientes</h2>
       <div id="feedback-list"></div>
+      
       <div id="auth-section" style="text-align:center;">
         <button class="btn-pix" style="width:auto; padding:12px 30px;" onclick="loginGoogle()">🔐 Login com Google para comentar</button>
       </div>
+
       <div id="comment-area" style="display:none; text-align: center;">
         <p>Logado como: <strong id="user-display-name"></strong></p>
-        <textarea id="comment-input" style="width:100%; height:80px; background:#1a1a1a; color:#fff; border:1px solid #333; padding:10px; border-radius:8px;" placeholder="O que você achou?"></textarea>
-        <button class="btn-pix" onclick="sendComment()" style="margin-top: 10px;">PUBLICAR</button>
+        <textarea id="comment-input" style="width:100%; height:80px; background:#1a1a1a; color:#fff; border:1px solid #333; padding:10px; border-radius:8px;" placeholder="O que você achou do nosso serviço?"></textarea>
+        <button class="btn-pix" onclick="sendComment()" style="margin-top: 10px;">PUBLICAR COMENTÁRIO 💬</button>
+        <button onclick="logout()" style="background:none; border:none; color:#888; cursor:pointer; font-size:12px; margin-top:10px;">Sair da conta</button>
       </div>
     </div>
   </section>
@@ -178,14 +175,13 @@
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
 
 <script>
-// CONFIGURAÇÃO FIREBASE
+// --- CONFIGURAÇÃO FIREBASE ---
 const firebaseConfig = {
   apiKey: "AIzaSyDkzu7El2JNbQA7kflKjNX8DdsAibG7uGU",
   authDomain: "site-467da.firebaseapp.com",
   databaseURL: "https://site-467da-default-rtdb.firebaseio.com",
   projectId: "site-467da",
   storageBucket: "site-467da.firebasestorage.app",
-  messagingSenderId: "749496526421",
   appId: "1:749496526421:web:53d7d52bfcdc04b0be96dc"
 };
 
@@ -194,7 +190,7 @@ const auth = firebase.auth();
 const db = firebase.database();
 const admins = ["hugoalevi731@gmail.com", "milezivictor@gmail.com"];
 
-// LIGAR TV
+// --- FUNÇÃO LIGAR TV ---
 function ligarTV() {
   const flash = document.getElementById('flash');
   flash.style.display = 'block';
@@ -209,23 +205,40 @@ function ligarTV() {
   }, 700);
 }
 
-// RESTANTE DAS FUNÇÕES (LOGIN, COMENTÁRIOS, PIX)
+// --- SISTEMA DE LOGIN E COMENTÁRIOS ---
 function loginGoogle() {
-  auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider);
 }
 
+function logout() { auth.signOut(); }
+
 auth.onAuthStateChanged(user => {
-  document.getElementById('auth-section').style.display = user ? 'none' : 'block';
-  document.getElementById('comment-area').style.display = user ? 'block' : 'none';
-  if(user) document.getElementById('user-display-name').innerText = user.displayName;
+  if (user) {
+    document.getElementById('auth-section').style.display = 'none';
+    document.getElementById('comment-area').style.display = 'block';
+    document.getElementById('user-display-name').innerText = user.displayName;
+  } else {
+    document.getElementById('auth-section').style.display = 'block';
+    document.getElementById('comment-area').style.display = 'none';
+  }
   renderComments();
 });
 
 function sendComment() {
   const text = document.getElementById('comment-input').value;
-  if(text.trim() && auth.currentUser) {
-    db.ref('comments').push({ name: auth.currentUser.displayName, text: text, email: auth.currentUser.email });
-    document.getElementById('comment-input').value = '';
+  if (text.trim() === "") { alert("Digite algo!"); return; }
+  
+  if (auth.currentUser) {
+    db.ref('comments').push({
+      name: auth.currentUser.displayName,
+      text: text,
+      email: auth.currentUser.email,
+      timestamp: Date.now()
+    }).then(() => {
+      document.getElementById('comment-input').value = "";
+      alert("Comentário publicado!");
+    });
   }
 }
 
@@ -235,20 +248,26 @@ function renderComments() {
     list.innerHTML = "";
     snap.forEach(child => {
       const c = child.val();
-      const id = child.key;
       const isAdm = (auth.currentUser && admins.includes(auth.currentUser.email));
       const div = document.createElement('div');
       div.className = 'comment-item';
       div.innerHTML = `
         <div class="comment-user">${c.name}</div>
         <div>${c.text}</div>
-        <button class="btn-delete" style="display: ${isAdm ? 'block' : 'none'}" onclick="deleteComment('${id}')">Apagar</button>
+        ${isAdm ? `<button class="btn-delete" onclick="deleteComment('${child.key}')">Apagar</button>` : ''}
       `;
       list.prepend(div);
     });
   });
 }
 
+function deleteComment(id) {
+  if (confirm("Deseja apagar este depoimento?")) {
+    db.ref('comments/' + id).remove();
+  }
+}
+
+// --- FUNÇÕES PIX ---
 function gerarPix(v) {
     const p = "00020126360014BR.GOV.BCB.PIX011315a458f7-cb18-4179-a454-33eeadca9dca520400005303986540"+v.length+v+"5802BR5910MASTER NET6009SAO PAULO62070503***6304";
     document.getElementById('pix-code').value = p;
@@ -266,15 +285,15 @@ function copyPix() {
   setTimeout(() => toast.classList.remove("show"), 4000);
 }
 
-function enviarTeste() {
-    const d = document.getElementById('device-name').value;
-    if (!d.trim()) { alert("Digite o seu dispositivo!"); return; }
-    window.open(`https://wa.me/5519996804873?text=Olá! Quero meu teste grátis para meu dispositivo: ${d}`, '_blank');
-}
-
 function closeQR() { 
   document.querySelector('.overlay').style.display = 'none'; 
   document.getElementById('qr-modal').style.display = 'none'; 
+}
+
+function enviarTeste() {
+    const d = document.getElementById('device-name').value;
+    if (!d.trim()) { alert("Digite o modelo do dispositivo!"); return; }
+    window.open(`https://wa.me/5519996804873?text=Olá! Quero meu teste grátis para meu dispositivo: ${d}`, '_blank');
 }
 </script>
 </body>
