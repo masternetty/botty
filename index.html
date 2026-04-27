@@ -7,68 +7,74 @@
   <link rel="icon" href="logo.png" type="image/png">
   <style>
     body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
-    header { text-align: center; padding: 2rem 1rem; }
-    section { padding: 1rem 1rem; max-width: 900px; margin: 0 auto; }
-    h1, h2 { color: #e60000; text-transform: uppercase; }
-    .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
-    .product { background: rgba(20,20,20,0.9); border: 2px solid #e60000; padding: 1.5rem; width: 280px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(230,0,0,0.3); }
+    header { text-align: center; padding: 3rem 1rem; background: linear-gradient(to bottom, #220000, #000); }
+    section { padding: 1rem 1rem; max-width: 1000px; margin: 0 auto; }
+    h1 { color: #e60000; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0; }
+    h2 { color: #fff; text-align: center; margin-bottom: 2rem; }
     
-    /* Botão de PIX */
-    .btn-pix { display: inline-block; margin-top: 1rem; padding: 0.8rem; background-color: #e60000; color: #fff; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; width: 100%; font-size: 1rem; }
-    .btn-pix:hover { background-color: #ff1a1a; transform: scale(1.02); }
-    .btn-link { display: block; margin-top: 10px; color: #888; text-decoration: none; font-size: 0.8rem; }
+    .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+    .product { background: rgba(20,20,20,0.9); border: 2px solid #e60000; padding: 1.5rem; width: 260px; border-radius: 15px; text-align: center; transition: 0.3s; position: relative; overflow: hidden; }
+    .product:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(230,0,0,0.4); }
+    .product b { font-size: 1.2rem; display: block; margin-bottom: 10px; }
+    .price { font-size: 2rem; font-weight: 800; color: #e60000; margin: 10px 0; }
+    
+    /* Botões de Plano */
+    .btn-pix { display: inline-block; margin-top: 1rem; padding: 0.8rem; background: #e60000; color: #fff; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; width: 100%; font-size: 1rem; }
+    .btn-pix:hover { background: #ff1a1a; }
 
-    /* Modal do QR Code */
-    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; backdrop-filter: blur(5px); }
+    /* Modais */
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; backdrop-filter: blur(8px); }
     #qr-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; border: 2px solid #e60000; padding: 25px; border-radius: 20px; z-index: 10000; text-align: center; width: 90%; max-width: 350px; }
     #qr-img { width: 220px; height: 220px; background: #fff; padding: 10px; border-radius: 10px; margin: 15px auto; display: block; }
-    #pix-code { width: 100%; height: 80px; background: #000; color: #00ff00; border: 1px solid #444; padding: 10px; font-size: 0.75rem; font-family: monospace; resize: none; border-radius: 8px; word-break: break-all; margin-bottom: 15px; }
+    #pix-code { width: 100%; height: 60px; background: #000; color: #00ff00; border: 1px solid #444; padding: 10px; font-size: 0.7rem; font-family: monospace; resize: none; border-radius: 8px; word-break: break-all; margin-bottom: 15px; }
     
-    .btn-copy { background: #00b300; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
-    .btn-close { background: #333; color: white; border: none; padding: 10px; width: 100%; border-radius: 8px; cursor: pointer; margin-top: 8px; }
+    /* Botões Flutuantes */
+    .floating-btns { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 12px; z-index: 9998; }
+    .float-btn { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: 0.3s; text-decoration: none; font-size: 24px; }
+    .float-btn:hover { transform: scale(1.1); }
+    .wa { background-color: #25d366; }
+    .tg { background-color: #0088cc; }
 
-    .feedbacks { background-color: rgba(10,10,10,0.9); padding: 2rem 1rem; border-top: 1px solid #e60000; }
-    .feedback { background: #222; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; border-left: 4px solid #e60000; }
-    .popup-btn { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 9999; }
-    .popup-btn a { background-color: #25d366; color: white; text-decoration: none; padding: 15px 25px; border-radius: 50px; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+    .instructions { background: #111; padding: 15px; border-radius: 10px; font-size: 0.85rem; color: #bbb; margin-top: 15px; border: 1px dashed #444; }
   </style>
 </head>
 <body>
 
 <header>
-  <img src="logo.png" alt="MASTER NET Logo" style="height: 100px; margin-bottom: 1rem;">
-  <h1>MASTER NET IPTV</h1>
-  <p>Escolha seu plano e gere o PIX na hora!</p>
+  <img src="logo.png" alt="MASTER NET" style="height: 100px; margin-bottom: 1rem;">
+  <h1>MASTER NET IPTV 🚀</h1>
+  <p>A melhor grade de canais, filmes e séries do Brasil!</p>
 </header>
 
 <section>
+  <h2>💎 Escolha seu Plano</h2>
   <div class="products">
     <div class="product">
-      <p><b>Teste de Acesso</b></p>
-      <p style="font-size: 1.5rem; font-weight: 800; color: #e60000;">R$ 0,10</p>
-      <button class="btn-pix" onclick="gerarPix('0.10', 'TESTE')">GERAR PIX</button>
-      <a href="https://mpago.la/22V7wWL" target="_blank" class="btn-link">Pagar via Cartão</a>
+      <b>⚡ Teste 2 Horas</b>
+      <p>Ideal para testar a qualidade!</p>
+      <div class="price">R$ 0,10</div>
+      <button class="btn-pix" onclick="gerarPix('0.10', 'TESTE_IPTV')">🚀 GERAR ACESSO</button>
     </div>
 
     <div class="product">
-      <p><b>Plano 1 Mês</b></p>
-      <p style="font-size: 1.5rem; font-weight: 800; color: #e60000;">R$ 35,00</p>
-      <button class="btn-pix" onclick="gerarPix('35.00', '1MES')">GERAR PIX</button>
-      <a href="https://mpago.la/2Y94v1R" target="_blank" class="btn-link">Pagar via Cartão</a>
+      <b>👑 Plano Mensal</b>
+      <p>Canais + Filmes + Séries (4K)</p>
+      <div class="price">R$ 35,00</div>
+      <button class="btn-pix" onclick="gerarPix('35.00', '1_MES_PREMIUM')">💎 ASSINAR AGORA</button>
     </div>
 
     <div class="product">
-      <p><b>Plano 2 Meses</b></p>
-      <p style="font-size: 1.5rem; font-weight: 800; color: #e60000;">R$ 60,00</p>
-      <button class="btn-pix" onclick="gerarPix('60.00', '2MESES')">GERAR PIX</button>
-      <a href="https://mpago.la/2ZHZtoj" target="_blank" class="btn-link">Pagar via Cartão</a>
+      <b>🔥 Plano Bimestral</b>
+      <p>O melhor custo benefício!</p>
+      <div class="price">R$ 60,00</div>
+      <button class="btn-pix" onclick="gerarPix('60.00', '2_MESES_PREMIUM')">🔥 QUERO ESTE</button>
     </div>
 
     <div class="product">
-      <p><b>Plano 4 Meses</b></p>
-      <p style="font-size: 1.5rem; font-weight: 800; color: #e60000;">R$ 100,00</p>
-      <button class="btn-pix" onclick="gerarPix('100.00', '4MESES')">GERAR PIX</button>
-      <a href="https://mpago.la/28h8M7b" target="_blank" class="btn-link">Pagar via Cartão</a>
+      <b>⭐ Plano Master</b>
+      <p>4 meses de entretenimento total!</p>
+      <div class="price">R$ 100,00</div>
+      <button class="btn-pix" onclick="gerarPix('100.00', '4_MESES_MASTER')">⭐ SER PREMIUM</button>
     </div>
   </div>
 </section>
@@ -76,41 +82,34 @@
 <div class="overlay" onclick="closeQR()"></div>
 <div id="qr-modal">
   <h3 id="modal-titulo" style="margin: 0; color: #e60000;">Pagamento PIX</h3>
-  <img id="qr-img" src="" alt="Gerando QR Code...">
+  <img id="qr-img" src="" alt="Gerando QR...">
   <p style="font-size: 0.8rem; color: #bbb; margin-bottom: 5px;">Código Copia e Cola:</p>
   <textarea id="pix-code" readonly></textarea>
-  <button class="btn-copy" onclick="copyPix()">COPIAR CÓDIGO</button>
-  <button class="btn-close" onclick="closeQR()">CANCELAR</button>
-</div>
-
-<section class="feedbacks">
-  <h2>💬 Comentários</h2>
-  <div id="login-section"><button id="login-btn" style="background:#e60000; color:white; border:none; padding:10px; border-radius:5px; cursor:pointer;">🔐 Login com Google para comentar</button></div>
-  <div id="comment-section" style="display:none;">
-    <div id="feedback-list"></div>
-    <form id="comment-form">
-      <input type="text" id="name" placeholder="Seu nome" readonly style="width:100%; margin-bottom:5px; padding:8px; background: #333; color: #fff; border: none;">
-      <textarea id="message" placeholder="Seu comentário" required style="width:100%; height:60px; margin-bottom:5px; padding:8px; background: #333; color: #fff; border: none;"></textarea>
-      <button type="submit" style="background:#e60000; color:white; border:none; padding:10px; cursor:pointer; border-radius:5px; width:100%;">Enviar Comentário</button>
-    </form>
+  
+  <button id="btn-copy-action" class="btn-pix" style="background:#00b300;" onclick="copyPix()">📋 COPIAR CÓDIGO</button>
+  
+  <div class="instructions">
+    <b>PRÓXIMO PASSO:</b><br>
+    Após pagar, clique no botão que aparecerá para enviar o comprovante e receber seu login.
   </div>
-</section>
-
-<div class="popup-btn">
-  <a href="https://wa.me/5519996804873" target="_blank">💬 WhatsApp</a>
+  
+  <button class="btn-pix" style="background:#333;" onclick="closeQR()">FECHAR</button>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
+<div class="floating-btns">
+  <a href="https://t.me/SEU_USER_TELEGRAM" target="_blank" class="float-btn tg" title="Telegram Bot">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="35">
+  </a>
+  <a href="https://wa.me/5519996804873?text=Olá! Acabei de realizar o pagamento e quero meu acesso." target="_blank" class="float-btn wa" title="Suporte WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35">
+  </a>
+</div>
 
 <script>
-// --- CONFIGURAÇÃO PIX ---
 const CHAVE_PIX = "15a458f7-cb18-4179-a454-33eeadca9dca";
 const NOME_RECEBEDOR = "MASTER NET";
 const CIDADE_RECEBEDOR = "SAO PAULO";
 
-// Função CRC16 CCITT (Essencial para o banco aceitar o PIX)
 function calcularCRC16(payload) {
     let crc = 0xFFFF;
     const polynomial = 0x1021;
@@ -129,26 +128,22 @@ function calcularCRC16(payload) {
 function gerarPix(valor, idTransacao) {
     const v = parseFloat(valor).toFixed(2);
     const f = (id, conteudo) => id + conteudo.length.toString().padStart(2, '0') + conteudo;
-
     const infoConta = f('00', 'BR.GOV.BCB.PIX') + f('01', CHAVE_PIX);
     
-    let payload = "000201";
-    payload += f('26', infoConta);
-    payload += "52040000";
-    payload += "5303986";
-    payload += f('54', v);
-    payload += "5802BR";
-    payload += f('59', NOME_RECEBEDOR);
-    payload += f('60', CIDADE_RECEBEDOR);
-    payload += f('62', f('05', idTransacao));
-    payload += "6304";
+    let payload = "000201" + f('26', infoConta) + "520400005303986" + f('54', v) + "5802BR" + f('59', NOME_RECEBEDOR) + f('60', CIDADE_RECEBEDOR) + f('62', f('05', idTransacao)) + "6304";
 
     const pixCompleto = payload + calcularCRC16(payload);
     
-    document.getElementById('modal-titulo').innerText = "Plano " + valor;
+    document.getElementById('modal-titulo').innerText = "Pagamento R$ " + valor;
     document.getElementById('pix-code').value = pixCompleto;
     document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(pixCompleto)}`;
     
+    // Reseta o botão de cópia
+    const btn = document.getElementById('btn-copy-action');
+    btn.innerText = "📋 COPIAR CÓDIGO";
+    btn.style.background = "#00b300";
+    btn.onclick = copyPix;
+
     document.querySelector('.overlay').style.display = 'block';
     document.getElementById('qr-modal').style.display = 'block';
 }
@@ -162,51 +157,17 @@ function copyPix() {
     const el = document.getElementById("pix-code");
     el.select();
     navigator.clipboard.writeText(el.value);
-    alert("Código copiado! Use o PIX COPIA E COLA no seu banco.");
+    
+    // Muda o botão para "Enviar Comprovante" após copiar
+    const btn = document.getElementById('btn-copy-action');
+    btn.innerText = "✅ COPIADO! ENVIAR COMPROVANTE";
+    btn.style.background = "#25d366";
+    btn.onclick = function() {
+        window.open("https://wa.me/5519996804873?text=Oi, já copiei o código e paguei o PIX. Aqui está o comprovante!", "_blank");
+    };
+    
+    alert("Código copiado! Pague no seu banco e depois clique no botão verde para enviar o comprovante.");
 }
-
-// --- FIREBASE ---
-const firebaseConfig = {
-  apiKey: "AIzaSyDkzu7El2JNbQA7kflKjNX8DdsAibG7uGU",
-  authDomain: "site-467da.firebaseapp.com",
-  databaseURL: "https://site-467da-default-rtdb.firebaseio.com",
-  projectId: "site-467da",
-  storageBucket: "site-467da.appspot.com",
-  messagingSenderId: "749496526421",
-  appId: "1:749496526421:web:53d7d52bfcdc04b0be96dc"
-};
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const database = firebase.database();
-
-document.getElementById('login-btn').onclick = () => {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider);
-};
-
-auth.onAuthStateChanged(user => {
-  if (user) {
-    document.getElementById('login-section').style.display = "none";
-    document.getElementById('comment-section').style.display = "block";
-    document.getElementById('name').value = user.displayName;
-  }
-});
-
-document.getElementById('comment-form').onsubmit = e => {
-  e.preventDefault();
-  const name = document.getElementById('name').value;
-  const message = document.getElementById('message').value;
-  database.ref("feedbacks").push({ name, message, timestamp: Date.now() });
-  document.getElementById('message').value = "";
-};
-
-database.ref("feedbacks").on("child_added", snapshot => {
-  const feedback = snapshot.val();
-  const div = document.createElement("div");
-  div.className = "feedback";
-  div.innerHTML = `<strong>${feedback.name}:</strong> ${feedback.message}`;
-  document.getElementById("feedback-list").prepend(div);
-});
 </script>
 
 </body>
