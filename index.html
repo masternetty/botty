@@ -15,98 +15,106 @@
     h1 { color: var(--primary); text-transform: uppercase; letter-spacing: 3px; margin: 0; }
     h2 { text-align: center; color: #fff; margin-bottom: 2rem; text-transform: uppercase; font-size: 1.4rem; letter-spacing: 2px; }
 
+    /* Notificação Customizada (O Pop-up que você pediu) */
+    #toast {
+      position: fixed;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--secondary);
+      color: #000;
+      padding: 15px 25px;
+      border-radius: 50px;
+      font-weight: bold;
+      z-index: 10001;
+      transition: top 0.5s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      text-align: center;
+      min-width: 280px;
+    }
+    #toast.show { top: 20px; }
+
     /* Planos */
     .products { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-    .product { background: var(--card); border: 2px solid var(--primary); padding: 20px; width: 280px; border-radius: 15px; text-align: center; transition: 0.3s; }
+    .product { background: var(--card); border: 2px solid var(--primary); padding: 20px; width: 280px; border-radius: 15px; text-align: center; transition: 0.3s; position: relative; }
     .product:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(230, 0, 0, 0.3); }
     .price { font-size: 2.2rem; font-weight: 900; color: var(--primary); margin: 15px 0; }
     
     .btn-pix { background: var(--primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; margin-bottom: 8px; }
     .btn-paid { background: transparent; color: var(--secondary); border: 1px solid var(--secondary); padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.9rem; text-decoration: none; display: inline-block; box-sizing: border-box; }
-    .device-input { width: 100%; padding: 8px; margin-top: 10px; border-radius: 5px; border: 1px solid #444; background: #000; color: #fff; box-sizing: border-box; font-size: 0.8rem; }
+    .device-input { width: 100%; padding: 8px; margin-top: 10px; border-radius: 5px; border: 1px solid #444; background: #000; color: #fff; box-sizing: border-box; }
 
     /* Pagamentos */
     .payments { background: #0a0a0a; padding: 3rem 1rem; border-radius: 15px; text-align: center; margin: 2rem auto; border: 1px solid #333; }
     .payment-icons { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; align-items: center; }
-    .pay-item { display: flex; flex-direction: column; align-items: center; gap: 15px; }
     .pay-item img.img-pix { width: 100px; height: auto; }
     .pay-item img.img-card { width: 180px; height: auto; }
-    .pay-item span { font-size: 1rem; font-weight: bold; color: #fff; }
 
     /* Comentários */
     .comment-box { background: #0a0a0a; padding: 2rem; border-radius: 15px; border-top: 2px solid var(--primary); margin-top: 3rem; }
-    #feedback-list { margin-bottom: 20px; max-height: 400px; overflow-y: auto; text-align: left; }
-    .comment-item { background: #1a1a1a; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid var(--primary); position: relative; }
-    .comment-user { font-weight: bold; color: var(--primary); font-size: 0.9rem; }
-    .btn-delete { position: absolute; top: 10px; right: 10px; background: #500; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.7rem; display: none; }
-    
-    /* Modal PIX */
+    .comment-item { background: #1a1a1a; padding: 15px; border-radius: 10px; margin-bottom: 10px; position: relative; border-left: 4px solid var(--primary); }
+    .btn-delete { position: absolute; top: 10px; right: 10px; background: #500; color: #fff; border: none; padding: 5px; border-radius: 5px; cursor: pointer; font-size: 10px; display: none; }
+
+    /* Modal QR Code */
     .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; backdrop-filter: blur(5px); }
     #qr-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; border: 2px solid var(--primary); padding: 25px; border-radius: 20px; z-index: 10000; text-align: center; width: 90%; max-width: 350px; }
     #qr-img { width: 220px; height: 220px; background: #fff; padding: 10px; border-radius: 10px; margin: 15px auto; display: block; }
-    #pix-code { width: 100%; height: 70px; background: #000; color: #0f0; border: 1px solid #333; padding: 10px; font-size: 0.7rem; font-family: monospace; resize: none; border-radius: 8px; }
-
-    /* Flutuantes */
-    .float-wrap { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 999; }
-    .float-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-    .wa { background: #25d366; }
-    .tg { background: #0088cc; }
+    #pix-code { width: 100%; height: 60px; background: #000; color: #0f0; border: 1px solid #333; padding: 10px; font-size: 0.7rem; resize: none; border-radius: 8px; }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>MASTER NET IPTV 🚀</h1>
-</header>
+<div id="toast">Copiado! Abra o banco que deseja pagar.</div>
+
+<header><h1>MASTER NET IPTV 🚀</h1></header>
 
 <section>
   <h2>💎 Escolha seu Plano</h2>
   <div class="products">
     <div class="product">
-      <b>⚡ 1 MÊS</b>
+      <b>35 RS 1 MÊS</b>
       <div class="price">R$ 35,00</div>
       <button class="btn-pix" onclick="gerarPix('35.00')">PAGAR PIX</button>
-      <a href="https://wa.me/5519996804873?text=Olá! Acabei de pagar o plano de 1 MÊS (R$ 35,00). Segue o comprovante:" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
+      <a href="https://wa.me/5519996804873?text=Olá! Paguei o plano de 1 MÊS (35 RS). Segue comprovante:" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
     </div>
 
     <div class="product">
-      <b>👑 2 MESES</b>
+      <b>60 RS 2 MÊS</b>
       <div class="price">R$ 60,00</div>
       <button class="btn-pix" onclick="gerarPix('60.00')">PAGAR PIX</button>
-      <a href="https://wa.me/5519996804873?text=Olá! Acabei de pagar o plano de 2 MESES (R$ 60,00). Segue o comprovante:" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
+      <a href="https://wa.me/5519996804873?text=Olá! Paguei o plano de 2 MÊS (60 RS). Segue comprovante:" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
     </div>
 
     <div class="product">
-      <b>🔥 4 MESES</b>
+      <b>100 RS 4 MÊS</b>
       <div class="price">R$ 100,00</div>
       <button class="btn-pix" onclick="gerarPix('100.00')">PAGAR PIX</button>
-      <a href="https://wa.me/5519996804873?text=Olá! Acabei de pagar o plano de 4 MESES (R$ 100,00). Segue o comprovante:" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
+      <a href="https://wa.me/5519996804873?text=Olá! Paguei o plano de 4 MÊS (100 RS). Segue comprovante:" target="_blank" class="btn-paid">JÁ PAGUEI ✅</a>
     </div>
 
     <div class="product" style="border-color: var(--secondary);">
-      <b style="color: var(--secondary);">🎁 TESTE GRÁTIS</b>
+      <b style="color: var(--secondary);">TESTE GRÁTIS</b>
       <div class="price" style="color: var(--secondary);">R$ 0,00</div>
       <a href="https://wa.me/5519996804873?text=Olá! Quero meu teste grátis." target="_blank" class="btn-pix" style="background: var(--secondary); text-decoration: none; display: block;">QUERO MEU TESTE</a>
-      <input type="text" class="device-input" placeholder="Dispositivo que deseja usar o app">
+      <input type="text" class="device-input" placeholder="Dispositivo que deseja usar">
       <small style="display:block; margin-top:5px; font-size:10px; color:#888;">Insira o dispositivo que você deseja usar o app</small>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>💳 Formas de Pagamento Aceitas</h2>
   <div class="payments">
     <div class="payment-icons">
       <div class="pay-item"><img src="pix.png" alt="Pix" class="img-pix"><span>PIX</span></div>
-      <div class="pay-item"><img src="card.png" alt="Visa e Master" class="img-card"><span>VISA / MASTER</span></div>
+      <div class="pay-item"><img src="card.png" alt="Visa Master" class="img-card"><span>VISA / MASTER</span></div>
     </div>
   </div>
 </section>
 
 <div class="overlay" onclick="closeQR()"></div>
 <div id="qr-modal">
-  <h3 id="modal-titulo" style="margin:0; color:var(--primary);">Pagamento PIX</h3>
-  <img id="qr-img" src="" alt="QR Code">
+  <h3 style="margin:0; color:var(--primary);">Pagamento PIX</h3>
+  <img id="qr-img" src="" alt="QR">
   <textarea id="pix-code" readonly></textarea>
   <button class="btn-pix" style="background:var(--secondary); margin-top:15px;" onclick="copyPix()">COPIAR CÓDIGO</button>
   <button class="btn-pix" style="background:#444;" onclick="closeQR()">FECHAR</button>
@@ -114,30 +122,25 @@
 
 <section>
   <div class="comment-box">
-    <h2>💬 Depoimentos dos Clientes</h2>
+    <h2>💬 Depoimentos</h2>
     <div id="feedback-list"></div>
     <div id="auth-section" style="text-align:center;">
       <button class="btn-pix" style="width:auto; padding:10px 25px;" onclick="loginGoogle()">🔐 Login com Google para comentar</button>
     </div>
     <div id="comment-area" style="display:none;">
-      <p>Logado como: <strong id="user-display-name"></strong></p>
-      <textarea id="comment-input" style="width:100%; height:80px; background:#1a1a1a; color:#fff; border:1px solid #333; padding:10px; border-radius:8px;" placeholder="O que você achou do nosso IPTV?"></textarea>
+      <p>Logado: <strong id="user-display-name"></strong></p>
+      <textarea id="comment-input" style="width:100%; height:80px; background:#1a1a1a; color:#fff; border:1px solid #333; padding:10px; border-radius:8px;" placeholder="O que achou do IPTV?"></textarea>
       <button class="btn-pix" onclick="sendComment()">PUBLICAR</button>
-      <button onclick="logout()" style="background:none; border:none; color:#888; cursor:pointer;">Sair</button>
+      <button onclick="logout()" style="background:none; border:none; color:#888; cursor:pointer; font-size: 12px;">Sair</button>
     </div>
   </div>
 </section>
-
-<div class="float-wrap">
-  <a href="https://wa.me/5519996804873" class="float-btn wa" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30"></a>
-</div>
 
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
 
 <script>
-// --- CONFIGURAÇÃO ---
 const firebaseConfig = {
   apiKey: "AIzaSyDkzu7El2JNbQA7kflKjNX8DdsAibG7uGU",
   authDomain: "site-467da.firebaseapp.com",
@@ -151,13 +154,11 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
-
-// E-MAILS DOS ADMS QUE PODEM APAGAR
 const admins = ["hugoalevi731@gmail.com", "milezivictor@gmail.com"];
 
 function loginGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).catch(e => alert("Erro ao logar. Domínio não autorizado no Firebase."));
+  auth.signInWithPopup(provider).catch(e => alert("Erro: Verifique o domínio no Firebase."));
 }
 
 function logout() { auth.signOut(); }
@@ -166,65 +167,58 @@ auth.onAuthStateChanged(user => {
   document.getElementById('auth-section').style.display = user ? 'none' : 'block';
   document.getElementById('comment-area').style.display = user ? 'block' : 'none';
   if(user) document.getElementById('user-display-name').innerText = user.displayName;
-  
-  // Atualiza visibilidade dos botões de apagar conforme o login
-  const deleteButtons = document.querySelectorAll('.btn-delete');
-  deleteButtons.forEach(btn => {
-    btn.style.display = (user && admins.includes(user.email)) ? 'block' : 'none';
-  });
+  renderComments();
 });
 
 function sendComment() {
   const text = document.getElementById('comment-input').value;
   if(text.trim() && auth.currentUser) {
-    db.ref('comments').push({ 
-      name: auth.currentUser.displayName, 
-      text: text, 
-      email: auth.currentUser.email,
-      timestamp: Date.now() 
-    });
+    db.ref('comments').push({ name: auth.currentUser.displayName, text: text, email: auth.currentUser.email });
     document.getElementById('comment-input').value = '';
   }
 }
 
 function deleteComment(id) {
-  if(confirm("Deseja apagar este comentário?")) {
-    db.ref('comments/' + id).remove();
-    location.reload(); // Recarrega para limpar da tela
-  }
+  if(confirm("Apagar comentário?")) db.ref('comments/' + id).remove();
 }
 
-// Carregar comentários
-db.ref('comments').limitToLast(20).on('value', snap => {
-  const list = document.getElementById('feedback-list');
-  list.innerHTML = "";
-  snap.forEach(child => {
-    const c = child.val();
-    const id = child.key;
-    const isAdm = (auth.currentUser && admins.includes(auth.currentUser.email));
-    
-    const div = document.createElement('div');
-    div.className = 'comment-item';
-    div.innerHTML = `
-      <div class="comment-user">${c.name}</div>
-      <div>${c.text}</div>
-      <button class="btn-delete" style="display: ${isAdm ? 'block' : 'none'}" onclick="deleteComment('${id}')">Apagar</button>
-    `;
-    list.prepend(div);
+function renderComments() {
+  db.ref('comments').on('value', snap => {
+    const list = document.getElementById('feedback-list');
+    list.innerHTML = "";
+    snap.forEach(child => {
+      const c = child.val();
+      const id = child.key;
+      const isAdm = (auth.currentUser && admins.includes(auth.currentUser.email));
+      const div = document.createElement('div');
+      div.className = 'comment-item';
+      div.innerHTML = `<div class="comment-user">${c.name}</div><div>${c.text}</div>
+      <button class="btn-delete" style="display: ${isAdm ? 'block' : 'none'}" onclick="deleteComment('${id}')">Apagar</button>`;
+      list.prepend(div);
+    });
   });
-});
+}
 
-// PIX
 function gerarPix(v) {
-    const val = parseFloat(v).toFixed(2);
-    const p = "00020126360014BR.GOV.BCB.PIX011315a458f7-cb18-4179-a454-33eeadca9dca520400005303986540"+val.length+val+"5802BR5910MASTER NET6009SAO PAULO62070503***6304";
+    const p = "00020126360014BR.GOV.BCB.PIX011315a458f7-cb18-4179-a454-33eeadca9dca520400005303986540"+v.length+v+"5802BR5910MASTER NET6009SAO PAULO62070503***6304";
     document.getElementById('pix-code').value = p;
     document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(p)}`;
     document.querySelector('.overlay').style.display = 'block';
     document.getElementById('qr-modal').style.display = 'block';
 }
+
+function copyPix() {
+  const code = document.getElementById("pix-code");
+  code.select();
+  document.execCommand("copy");
+  
+  // LOGICA DO POP-UP QUE SOBE (TOAST)
+  const toast = document.getElementById("toast");
+  toast.classList.add("show");
+  setTimeout(() => { toast.classList.remove("show"); }, 4000);
+}
+
 function closeQR() { document.querySelector('.overlay').style.display = 'none'; document.getElementById('qr-modal').style.display = 'none'; }
-function copyPix() { document.getElementById("pix-code").select(); document.execCommand("copy"); alert("Copiado!"); }
 </script>
 </body>
 </html>
